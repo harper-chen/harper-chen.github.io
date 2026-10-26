@@ -504,7 +504,7 @@ details.co .src { color: var(--muted); font-size: .875rem; }
   <header class="top">
     <a class="mark" href="#top" data-k="brand">Harper Chen</a>
     <div class="controls">
-      <button class="ctl" id="langBtn" type="button" aria-label="Switch language">中文</button>
+      <button class="ctl" id="langBtn" type="button" aria-label="Switch language" hidden style="display:none">中文</button>
       <button class="ctl" id="themeBtn" type="button" aria-label="Switch theme" data-k="theme">Theme</button>
     </div>
   </header>
@@ -1085,7 +1085,8 @@ const I18N = {
 
 /* ---------- state ---------- */
 let lang = "en";
-try { const s = localStorage.getItem("hc-lang"); if (s === "zh" || s === "en") lang = s; } catch (e) {}
+// English only for now. To re-enable Chinese: remove the "hidden" attribute and style="display:none" on #langBtn, and restore the localStorage line below.
+// try { const s = localStorage.getItem("hc-lang"); if (s === "zh" || s === "en") lang = s; } catch (e) {}
 const T = () => I18N[lang];
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
