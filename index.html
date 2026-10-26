@@ -1,0 +1,1598 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Te-Chi (Harper) Chen: building people-analytics tools that explain their decisions.">
+<meta property="og:title" content="Harper Chen">
+<meta property="og:description" content="I build tools that turn scattered people data into decisions people can explain.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://harperchen.dev/">
+<meta property="og:image" content="https://harperchen.dev/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%233E5C48%27/%3E%3Ctext x=%2732%27 y=%2745%27 font-size=%2738%27 font-family=%27Arial%27 font-weight=%27700%27 text-anchor=%27middle%27 fill=%27%23fff%27%3EH%3C/text%3E%3C/svg%3E">
+<title>Harper Chen Portfolio</title>
+<meta name="description" content="Te-Chi (Harper) Chen builds people-data tools that explain themselves. WorkforceIQ, an AI recruiting system and research on AI-assisted hiring.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: one left-aligned column. The hero is a live relationship graph that links experience, projects, research and themes; the rest is a quiet reading list. */
+:root {
+  --bg: #F6F7F3;
+  --ink: #1E2420;
+  --muted: #5B665D;
+  --line: #D9DFD5;
+  --sage: #7E9B7C;
+  --sage-deep: #3F5A44;
+  --sage-wash: #E3EADF;
+  --card: #FFFFFF;
+  --accent: #E2A93B;
+  --accent-wash: #F8EDD3;
+  --accent-ink: #6E4A00;
+  --on-accent: #1E2420;
+  --display: "Bricolage Grotesque", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --body: "Instrument Sans", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121714; --ink: #E7ECE4; --muted: #9AA79B; --line: #2A332D;
+    --sage: #8FB08D; --sage-deep: #A9C7A6; --sage-wash: #1D2620; --card: #19201B; --accent: #E8B450; --accent-wash: #3A2F18; --accent-ink: #F0CB84; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121714; --ink: #E7ECE4; --muted: #9AA79B; --line: #2A332D;
+  --sage: #8FB08D; --sage-deep: #A9C7A6; --sage-wash: #1D2620; --card: #19201B; --accent: #E8B450; --accent-wash: #3A2F18; --accent-ink: #F0CB84; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  padding-block: 0;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1040px; margin-inline: auto; }
+a { color: var(--sage-deep); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--sage-deep); outline-offset: 3px; border-radius: 3px; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.12; text-wrap: balance; margin: 0; letter-spacing: -0.015em; }
+p { margin: 0; }
+
+/* header */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 22px; }
+.mark { font-family: var(--display); font-weight: 700; font-size: 1.125rem; text-decoration: none; color: var(--ink); }
+.controls { display: flex; gap: 8px; }
+.ctl {
+  font: inherit; font-size: 0.875rem; color: var(--ink); background: transparent;
+  border: 1px solid var(--line); border-radius: 999px; padding: 5px 13px; cursor: pointer;
+}
+.ctl:hover { border-color: var(--sage); background: var(--sage-wash); }
+.ctl[aria-pressed="true"] { border-color: var(--sage-deep); }
+
+/* hero */
+.hero { padding-block: clamp(16px, 3vw, 36px) 30px; display: grid; gap: 40px; }
+.htext { display: grid; gap: 18px; align-content: center; min-width: 0; }
+@media (min-width: 960px) { .hero { grid-template-columns: minmax(0, 1fr); } .hero .htext h1 { font-size: clamp(2rem, 3.3vw, 2.7rem); max-width: 14em; } }
+.hood.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px 40px; margin-top: 34px; padding-top: 26px; border-top: 1px solid var(--line); }
+.stats div { display: grid; gap: 4px; align-content: start; min-width: 0; }
+.stats b { font-family: var(--display); font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 800; letter-spacing: -0.02em; color: var(--sage-deep); line-height: 1.05; }
+.stats span { color: var(--muted); font-size: .9375rem; }
+@media (max-width: 860px) { .stats { grid-template-columns: minmax(0, 1fr); } }
+
+/* directory */
+.toc { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.tocard { display: grid; gap: 8px; align-content: start; text-decoration: none; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; transition: border-color .2s, transform .25s; }
+.tocard:hover { border-color: var(--sage-deep); transform: translateY(-3px); }
+.facts li { white-space: pre-line; }
+.tocard .tag { justify-self: start; color: var(--sage-deep); font-weight: 600; font-size: .875rem; }
+.tocard h3 { font-size: 1.35rem; }
+.tocard { grid-template-rows: auto auto 1fr; position: relative; }
+.tocard .tag { grid-row: 1; justify-self: end; font-size: .8125rem; margin-bottom: 4px; }
+.tocard h3 { grid-row: 2; } .tocard p { grid-row: 3; }
+.tocard:not(:has(.tag))::before { content: ""; display: block; height: 34px; grid-row: 1; }
+#contents .row:first-child .sh, #more .row:first-child .sh { white-space: nowrap; }
+@media (max-width: 860px) { .tocard:not(:has(.tag))::before { display: none; } .tocard { grid-template-rows: none; } .tocard .tag, .tocard h3, .tocard p { grid-row: auto; } }
+.tocard p { margin: 0; color: var(--muted); }
+.tocmore { margin: 22px 0 0; color: var(--muted); }
+@media (max-width: 860px) { .toc { grid-template-columns: minmax(0, 1fr); } }
+/* project blocks */
+.proj { display: grid; gap: 32px; }
+.phead { display: grid; gap: 4px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.ptitle { font-size: clamp(1.9rem, 3.6vw, 2.7rem); font-weight: 800; letter-spacing: -0.02em; }
+.phead .when { color: var(--muted); }
+.pgrid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px 56px; align-items: start; }
+.pgrid > div { display: grid; gap: 12px; align-content: start; min-width: 0; }
+.kick2 { font-family: var(--body, inherit); font-size: .9375rem; font-weight: 700; color: var(--sage-deep); letter-spacing: 0; }
+.pgrid p { margin: 0; }
+.pgrid .tech { color: var(--muted); font-size: .9375rem; }
+.pgrid .rlinks { display: flex; flex-wrap: wrap; gap: 6px 18px; font-weight: 500; }
+.mine { color: var(--muted); }
+.mycontrib { margin-top: 22px; background: var(--sage-wash); border-radius: 12px; padding: 12px 18px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 18px; align-items: baseline; }
+.mycontrib h3 { margin: 0; font-size: .9375rem; color: var(--sage-deep); white-space: nowrap; }
+.mycontrib p { margin: 0; line-height: 1.5; }
+@media (max-width: 700px) { .mycontrib { grid-template-columns: minmax(0, 1fr); } }
+.wf { margin-top: 36px; display: grid; gap: 6px; }
+.wfh { font-size: 1.0625rem; margin: 0; }
+.wfsub { margin: 0 0 12px; color: var(--muted); }
+.wfgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.wfcard { display: grid; gap: 10px; align-content: start; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px; min-width: 0; }
+.wfcard:first-child { grid-column: 1 / -1; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.wfcard:first-child .wftop { grid-column: 1 / -1; }
+.wftop { display: flex; align-items: center; gap: 12px; color: var(--sage-deep); }
+.wftop h3 { margin: 0; flex: 1; font-size: 1.15rem; color: var(--ink); }
+.wfn { font-weight: 700; font-size: .875rem; color: var(--sage-deep); border: 1px solid var(--sage); border-radius: 999px; padding: 1px 10px; }
+.wfpain, .wffix { border-radius: 10px; padding: 10px 14px; display: grid; gap: 2px; }
+.wfpain, .wffix { align-content: start; }
+.wfpain { background: var(--accent-wash); }
+.wffix { background: var(--sage-wash); }
+.wfpain span, .wffix span { font-size: .8125rem; font-weight: 700; color: var(--sage-deep); }
+.wfpain span { color: var(--accent-ink, var(--ink)); }
+.wfpain p, .wffix p { margin: 0; font-size: .9375rem; line-height: 1.45; }
+@media (max-width: 700px) { .wfgrid { grid-template-columns: minmax(0, 1fr); } .wfcard:first-child { grid-template-columns: minmax(0, 1fr); } }
+.how { margin: 0; padding-left: 1.2em; display: grid; gap: 10px; }
+.how li::marker { color: var(--sage-deep); font-weight: 700; }
+.roles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.rcard { display: grid; gap: 10px; align-content: start; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
+.rimg { display: block; width: 100%; height: 150px; object-fit: cover; object-position: left top; border-radius: 10px; border: 1px solid var(--line); }
+.rtop { display: flex; align-items: center; gap: 10px; color: var(--sage-deep); }
+.rtop h3 { font-size: 1.2rem; color: var(--ink); }
+.rwho { margin: 0; font-weight: 600; }
+.rcard ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; color: var(--ink); font-size: .9375rem; }
+@media (max-width: 860px) { .pgrid, .roles { grid-template-columns: minmax(0, 1fr); } }
+.thumb.wide { aspect-ratio: auto; height: clamp(180px, 24vw, 300px); border: 1px solid var(--line); border-radius: 14px; }
+.brief .cobody { display: grid; gap: 14px; max-width: none; }
+.brief .cobody p { margin: 0; }
+.rec-principles { display: grid; gap: 0.85rem; }
+.rec-principles .principle { padding: 0.35rem 0 0.55rem 0.9rem; border-left: 2px solid var(--line, #d9e2d8); }
+.rec-principles .principle strong { display: block; margin-bottom: 0.3rem; font-size: 0.96rem; font-weight: 700; }
+.rec-principles .principle p { line-height: 1.65; }
+.screens { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-start; }
+.screens > h3 { flex: 0 0 100%; }
+.screens > div { display: contents; }
+.screens .casewrap { flex: 0 0 auto; max-width: 100%; min-width: 0; }
+.screens .casewrap:has(details[open]) { flex-basis: 100%; }
+.screens > .casewrap { margin-top: 0; }
+#contents, #wiq, #rec { padding-top: clamp(56px, 8vw, 96px); }
+#wiq .ptitle, #rec .ptitle { color: var(--ink); }
+
+/* pain -> fix pairs */
+.rolehead { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.6fr); column-gap: 32px; padding: 0 19px; margin: 0 0 -29px; font-weight: 700; font-size: .9375rem; color: var(--sage-deep); }
+.rolehead .cols { grid-column: 2; display: grid; grid-template-columns: minmax(0, .5fr) minmax(0, .5fr) 40px minmax(0, .625fr) minmax(0, .625fr); }
+.rolehead .cols span { padding: 4px 14px; border-radius: 10px; font-size: .8125rem; line-height: 1.4; color: var(--ink); }
+.rolehead .cols span:first-child { grid-column: 1 / 3; background: var(--accent-wash); }
+.rolehead .cols span:last-child { grid-column: 4 / 6; background: var(--sage-wash); }
+@media (max-width: 860px) { .rolehead { grid-template-columns: minmax(0, 1fr); } .rolehead .cols { grid-column: 1; } }
+@media (max-width: 560px) { .rolehead { display: none; } }
+.pfleg { margin: -12px 0 -6px; color: var(--muted); }
+.row .tech[data-k="eduCourses"] { max-width: none; }
+.edu { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 4px; }
+.edu li:first-child { font-weight: 600; }
+.award { margin: 8px 0 0; color: var(--muted); font-size: .875rem; font-weight: 600; }
+#more .row:first-child { border-bottom: 1px solid var(--line); padding-bottom: 14px; }
+.screens > h3.kick2 { font-size: 1.0625rem; }
+.ul { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: .22em; text-underline-offset: .18em; text-decoration-skip-ink: none; }
+.hero .lead { font-size: clamp(1.1rem, 1.8vw, 1.4rem); line-height: 1.4; margin: 0; font-weight: 500; }
+@media (min-width: 700px) { .hero .lead { max-width: 46em; } }
+.hero .facts li { background: var(--accent-wash); border-radius: 12px; padding: 12px 16px; line-height: 1.5; }
+.hero .facts li::before { margin-top: .55em; }
+.row .when { white-space: pre-line; }
+.hero .htext h1 { max-width: none; font-size: clamp(2.2rem, 4vw, 3.2rem); } .hero .htext { display: grid; gap: 16px; justify-items: start; } .hero .facts { margin: 8px 0 0; }
+.pairs { display: grid; gap: 16px; }
+.pair { display: grid; justify-items: stretch; gap: 0; }
+.pair .pain, .pair .fix { margin: 0; padding: 10px 14px; border-radius: 10px; font-size: .9375rem; line-height: 1.45; }
+.pair .pain { background: var(--accent-wash); color: var(--ink); font-weight: 600; }
+.pair .fix { background: var(--sage-wash); color: var(--ink); }
+.pair .who { justify-self: start; font-size: .8125rem; font-weight: 700; color: var(--sage-deep); margin-bottom: 6px; }
+.arr { display: block; position: relative; width: 2px; height: 26px; margin: 0 auto; background: var(--sage-deep); }
+.arr::after { content: ""; position: absolute; left: 50%; bottom: 0; width: 9px; height: 9px; border-right: 2px solid var(--sage-deep); border-bottom: 2px solid var(--sage-deep); transform: translateX(-50%) rotate(45deg); transform-origin: center; }
+.pair.anim .arr { transform: scaleY(0); transform-origin: top; }
+.pair.anim .arr::after { opacity: 0; }
+.pair.anim .fix { opacity: 0; transform: translateY(6px); }
+.pair.anim.in .arr { animation: drawv .5s ease forwards; }
+.pair.anim.in .arr::after { animation: showhead .2s .45s forwards; }
+.pair.anim.in .fix { opacity: 1; transform: none; transition: opacity .45s .5s, transform .45s .5s; }
+@keyframes drawv { to { transform: scaleY(1); } }
+@keyframes showhead { to { opacity: 1; } }
+.pairs.h { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 28px; }
+.pairs.h .pair { grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1.25fr); align-items: stretch; }
+.pairs.h .pair .who { grid-column: 1 / -1; }
+.pairs.h .arr { width: 40px; height: 2px; margin: auto 0; }
+.pairs.h .arr::after { left: auto; right: 0; bottom: 50%; transform: translateY(50%) rotate(-45deg); }
+.pairs.h .pair.anim .arr { transform: scaleX(0); transform-origin: left; }
+.pairs.h .pair.anim.in .arr { animation: drawh .5s ease forwards; }
+@keyframes drawh { to { transform: scaleX(1); } }
+@media (max-width: 960px) { .pairs.h { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 560px) {
+  .pairs.h .pair { grid-template-columns: minmax(0, 1fr); }
+  .pairs.h .arr { width: 2px; height: 26px; margin: 0 auto; }
+  .pairs.h .arr::after { left: 50%; right: auto; bottom: 0; transform: translateX(-50%) rotate(45deg); }
+  .pairs.h .pair.anim .arr { transform: scaleY(0); transform-origin: top; }
+  .pairs.h .pair.anim.in .arr { animation: drawv .5s ease forwards; }
+}
+@media (prefers-reduced-motion: reduce) { .pair.anim .arr, .pairs.h .pair.anim .arr { transform: none; animation: none !important; } .pair.anim .arr::after { opacity: 1; animation: none !important; } .pair.anim .fix { opacity: 1; transform: none; transition: none; } }
+
+/* name-swap illustration */
+.swap { margin: 18px 0 6px; display: grid; grid-template-columns: minmax(0,1.5fr) 30px minmax(0,.7fr) 30px minmax(0,1.4fr); align-items: center; gap: 0; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+.sw-in { display: grid; gap: 8px; }
+.sw-cap { font-size: .8125rem; font-weight: 700; color: var(--sage-deep); }
+.sw-cv { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; display: grid; gap: 7px; }
+.sw-cv i { display: block; height: 6px; border-radius: 3px; background: var(--line); }
+.sw-cv i.s { width: 62%; }
+.sw-cv small { font-size: .75rem; color: var(--muted); line-height: 1.35; }
+.sw-name { display: flex; flex-wrap: nowrap; white-space: nowrap; align-items: center; gap: 6px; font-size: .875rem; }
+.sw-opt { background: var(--accent-wash); border-radius: 6px; padding: 1px 8px; font-weight: 700; }
+.sw-or { color: var(--muted); font-size: .8125rem; }
+.sw-gpt { text-align: center; display: grid; gap: 4px; justify-items: center; padding: 12px 8px; border-radius: 12px; background: var(--sage-wash); }
+.sw-gpt small { font-size: .75rem; color: var(--muted); line-height: 1.35; }
+.sw-arr { position: relative; height: 2px; background: var(--sage-deep); margin: 0 4px; }
+.sw-arr::after { content: ""; position: absolute; right: 0; top: 50%; width: 8px; height: 8px; border-right: 2px solid var(--sage-deep); border-top: 2px solid var(--sage-deep); transform: translateY(-50%) rotate(45deg); }
+.sw-out { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.sw-out .sw-cv b { font-size: .8125rem; }
+.sw-out p { grid-column: 1 / -1; margin: 4px 0 0; font-size: .875rem; font-weight: 600; }
+@media (max-width: 760px) { .swap { grid-template-columns: minmax(0,1fr); gap: 10px; } .sw-arr { width: 2px; height: 22px; margin: 0 auto; } .sw-arr::after { right: auto; left: 50%; top: auto; bottom: 0; transform: translateX(-50%) rotate(135deg); } }
+
+/* role cards: header left, horizontal pairs right */
+.roles { grid-template-columns: minmax(0, 1fr); }
+.rcard { grid-template-columns: minmax(0, 1fr) minmax(0, 2.6fr); column-gap: 32px; align-items: start; }
+.rcard > .rtop, .rcard > .rwho { grid-column: 1; }
+.rcard > .pairs { grid-column: 2; grid-row: 1 / span 3; }
+.roles .pairs.h { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+@media (max-width: 860px) { .rcard { grid-template-columns: minmax(0, 1fr); } .rcard > .pairs { grid-column: 1; grid-row: auto; } }
+.tryit { margin: 22px 0 0; }
+.tryit a { display: inline-block; font-weight: 600; color: var(--sage-deep); border: 1.5px solid var(--sage-deep); border-radius: 999px; padding: 9px 18px; text-decoration: none; }
+.tryit a:hover { background: var(--sage-wash); }
+/* flagship alignment */
+.ftext { align-items: stretch; }
+.fl, .fr { align-content: space-between; }
+/* featured research row */
+#more .row.feature { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: clamp(22px, 3vw, 36px); margin-block: 22px 8px; }
+#more .row.feature h3 { font-size: 1.5rem; }
+/* tighter experience */
+#experience .row { padding-block: 18px; }
+@media print { .fvis, .flag, .card, .row, .stats { break-inside: avoid; } }
+@media (max-width: 860px) { .hood.three { grid-template-columns: minmax(0, 1fr); } .ftext { grid-template-columns: minmax(0, 1fr) !important; } }
+.hero h1 { font-size: clamp(2rem, 4.4vw, 3.3rem); font-weight: 800; max-width: 19em; letter-spacing: -0.025em; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 4px; }
+.btn { display: inline-block; font-weight: 600; text-decoration: none; color: var(--on-accent); background: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 10px 22px; }
+.btn:hover { filter: brightness(.94); }
+.btn.ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn.ghost:hover { background: var(--sage-wash); filter: none; }
+
+.facts { list-style: none; padding: 0; margin: 2px 0 0; display: flex; flex-wrap: wrap; gap: 8px 26px; font-size: .9375rem; }
+.facts li { display: inline-flex; align-items: flex-start; gap: 9px; }
+.facts li::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-top: .5em; }
+.hood { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 40px; padding-top: 6px; }
+.hood h3 { font-size: 1.25rem; margin-bottom: 6px; }
+.hood p { max-width: 32em; color: var(--ink); }
+.nextgrid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 32px; }
+.hoodlinks { display: flex; flex-wrap: wrap; gap: 6px 20px; padding-top: 18px; font-weight: 500; }
+@media (max-width: 860px) { .hood, .nextgrid { grid-template-columns: minmax(0, 1fr); } }
+details.walk { margin-top: 4px; }
+details.walk > summary { cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 10px; font-weight: 600; color: var(--ink); border: 1px solid var(--ink); border-radius: 999px; padding: 9px 20px; }
+details.walk > summary::-webkit-details-marker { display: none; }
+details.walk > summary::before { content: "+"; font-size: 1.1rem; line-height: 1; }
+details.walk[open] > summary::before { content: "\2212"; }
+details.walk > summary:hover { background: var(--sage-wash); }
+details.walk[open] > summary { margin-bottom: 26px; }
+
+/* project cards */
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.card { border: 1px solid var(--line); border-radius: 14px; background: var(--card); overflow: hidden; display: flex; flex-direction: column; }
+.thumb { display: block; aspect-ratio: 16 / 9; overflow: hidden; border-bottom: 1px solid var(--line); background: #fff; }
+.thumb img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: left top; transition: transform .6s ease; }
+.thumb:hover img { transform: scale(1.03); }
+.cbody { padding: 20px 22px 24px; display: grid; gap: 8px; align-content: start; }
+.cbody h3 { font-size: 1.6rem; }
+.cbody .when { color: var(--muted); font-size: .9375rem; }
+.chips { list-style: none; padding: 0; margin: 6px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.chips li { background: var(--accent-wash); color: var(--accent-ink); border-radius: 999px; padding: 3px 12px; font-size: .875rem; font-weight: 500; }
+.cbody .tech { color: var(--muted); font-size: .9375rem; margin-top: 4px; }
+.cbody .rlinks { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 6px; font-weight: 500; }
+.hero .sub { color: var(--muted); max-width: 40em; font-size: 1.125rem; }
+.hero .sub strong { color: var(--ink); font-weight: 600; }
+
+/* graph */
+.graphwrap { border-block: 1px solid var(--line); margin-top: 8px; }
+#graph { display: block; width: 100%; height: clamp(300px, 32vw, 360px); touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.link { stroke: var(--line); stroke-width: 1.4; transition: opacity .2s, stroke .2s; }
+.link.hot { stroke: var(--sage); stroke-width: 2; }
+.node text, .node { }
+.node { cursor: grab; transition: opacity .2s; }
+.node:active { cursor: grabbing; }
+.node circle { transition: stroke-width .15s; }
+.node text { font-family: var(--body); font-size: 14.5px; font-weight: 500; fill: var(--ink); paint-order: stroke; stroke: var(--bg); stroke-width: 4px; stroke-linejoin: round; pointer-events: none; }
+.node.skill text { font-size: 11.5px; fill: var(--muted); }
+.node.theme text { fill: var(--muted); font-style: italic; }
+.node.me text { font-family: var(--display); font-weight: 700; font-size: 15px; }
+.node.me circle { fill: var(--sage-deep); }
+.node.work circle { fill: var(--sage); }
+.node.research circle { fill: var(--sage-wash); stroke: var(--sage-deep); stroke-width: 2.5; }
+.node.exp circle { fill: var(--bg); stroke: var(--sage-deep); stroke-width: 2.5; }
+.node.theme circle { fill: var(--sage-wash); stroke: var(--sage); stroke-width: 1.5; stroke-dasharray: 3 3; }
+.node.skill circle { fill: var(--muted); }
+.node.sel circle { stroke: var(--accent); stroke-width: 4.5; stroke-dasharray: none; }
+.node.sel text { font-weight: 700; }
+.node:focus-visible { outline: none; }
+.node:focus-visible circle { stroke: var(--accent); stroke-width: 4; }
+.dim { opacity: .22; }
+.compact .node.skill text, .compact .node.theme text { opacity: 0; }
+.compact .node.skill.show text, .compact .node.theme.show text { opacity: 1; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--muted); font-size: .875rem; padding-block: 12px 0; }
+.graphhead { display: grid; gap: 8px; padding-bottom: 14px; }
+.legend span { display: inline-flex; align-items: center; gap: 7px; }
+.legend i { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+.lg-work { background: var(--sage); } .lg-res { border: 2px solid var(--sage-deep); background: var(--sage-wash); } .lg-exp { border: 2px solid var(--sage-deep); } .lg-theme { border: 1.5px dashed var(--sage); background: var(--sage-wash); } .lg-skill { background: var(--muted); width: 8px !important; height: 8px !important; }
+.hint { color: var(--muted); font-size: .9375rem; padding-block: 0 8px; }
+
+.panel { display: grid; grid-template-columns: minmax(0, 14rem) minmax(0, 1fr); gap: 8px 36px; margin-top: 18px; padding: 18px 22px; min-height: 6rem; background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; }
+.panel h3 { font-size: 1.5rem; }
+.panel .pbody { max-width: 38em; }
+.panel .plinks { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 10px; font-size: 1rem; }
+
+.panel .connections { margin-top: 15px; padding-top: 12px; border-top: 1px solid var(--line); max-width: 44em; }
+.panel .connections[hidden] { display: none; }
+.panel .connections h4 { font-size: .93rem; font-weight: 650; letter-spacing: normal; text-transform: none; color: var(--ink); margin: 0 0 9px; }
+.panel .connections ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.panel .connections li { display: grid; gap: 1px; font-size: .88rem; line-height: 1.5; }
+.panel .connections li strong { font-weight: 650; color: var(--ink); }
+.panel .connections li span { color: var(--muted); }
+
+
+/* sections */
+section { padding-block: clamp(40px, 7vw, 76px) 0; }
+#work { padding-top: clamp(8px, 2vw, 24px) !important; }
+#walkthroughs { padding-top: clamp(80px, 11vw, 140px); }
+#walkthroughs .sh { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; }
+#hood .sh, #more .sh, #headed .sh, #experience .sh, #about .sh, #connect .sh, #contact .sh { font-size: clamp(1.2rem, 2vw, 1.4rem); font-weight: 600; letter-spacing: -0.01em; }
+#contents .sh, #more .sh, #experience .sh, #about .sh, #connect .sh, #wiq .ptitle, #rec .ptitle { font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 700; letter-spacing: -0.015em; line-height: 1.15; }
+#more, #headed, #experience, #about, #connect, #contact { padding-top: clamp(40px, 5.5vw, 60px); }
+#hood { padding-top: clamp(48px, 6vw, 72px); }
+#rec { padding-top: clamp(64px, 8vw, 96px) !important; }
+.casewrap { margin-top: 18px; }
+.sechead { display: grid; grid-template-columns: minmax(0, 16rem) minmax(0, 1fr); gap: 8px 40px; }
+.sh { font-family: var(--display); font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 700; color: var(--ink); letter-spacing: -0.015em; line-height: 1.15; }
+.sechead h2 { font-size: 1.05rem; font-weight: 600; letter-spacing: 0; color: var(--muted); font-family: var(--body); }
+.rows { display: grid; }
+.row { display: grid; grid-template-columns: minmax(0, 16rem) minmax(0, 1fr); gap: 6px 40px; padding-block: 26px; border-top: 1px solid var(--line); }
+.row:first-child { border-top: 0; padding-top: 0; }
+.row h3 { font-size: 1.5rem; }
+#more .row { position: relative; }
+.rowtag { position: absolute; top: 14px; right: 0; padding: 3px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); color: var(--sage-deep); font-weight: 600; font-size: .8125rem; }
+#more .row > div:last-of-type { padding-right: 84px; }
+@media (max-width: 760px) { #more .row > div:last-of-type { padding-right: 0; } .rowtag { position: static; justify-self: start; margin-bottom: 4px; } #more .row.feature .rowtag { position: static; } }
+#more .row.feature .rowtag { top: 16px; right: 18px; }
+.tocl { margin: 0; padding-left: 1.1em; color: var(--muted); display: grid; gap: 8px; }
+.trybtn { align-self: flex-start; margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; padding: 0 20px; min-height: 48px; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-weight: 700; text-decoration: none; border: 1.5px solid var(--accent); }
+.trybtn:hover { filter: brightness(1.05); transform: translateY(-1px); }
+.trybtn::before { content: "\25B6"; font-size: .7em; }
+.screensSub { flex: 0 0 100%; margin: -4px 0 4px; color: var(--muted); }
+.row .when { color: var(--muted); font-size: .9375rem; margin-top: 6px; }
+.row p + p { margin-top: 10px; }
+.row .tech { color: var(--muted); font-size: .9375rem; }
+.row .rlinks { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 10px; }
+.about p { max-width: 38em; }
+.about p + p { margin-top: 14px; }
+
+.contact .big { font-family: var(--display); font-size: 1.125rem; font-weight: 600; word-break: break-word; }
+.copybtn { margin-left: 12px; vertical-align: middle; }
+.clinks { display: flex; flex-wrap: wrap; gap: 6px 22px; margin-top: 14px; }
+footer { color: var(--muted); font-size: .875rem; padding-block: 64px 36px; }
+
+
+/* flagship project */
+.flag { display: grid; grid-template-columns: minmax(0, 1fr); gap: 56px; align-items: center; border: 1px solid var(--line); border-radius: 18px; background: var(--card); padding: clamp(26px, 4.4vw, 64px); }
+.ftext { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px 56px; align-items: start; }
+.fl, .fr { display: grid; gap: 22px; align-content: start; min-width: 0; }
+.flag h3 { font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 800; }
+.flag .when { color: var(--muted); font-size: .9375rem; margin-top: 4px; }
+.story { font-family: var(--display); font-size: 1.1875rem; line-height: 1.45; border-left: 4px solid var(--accent); padding-left: 16px; text-wrap: pretty; }
+.pts { margin: 0; display: grid; gap: 14px; }
+.pts dt { font-weight: 700; color: var(--sage-deep); font-size: .9375rem; }
+.pts dd { margin: 2px 0 0; font-size: 1rem; line-height: 1.55; }
+.flag .tech { color: var(--muted); font-size: .9375rem; }
+.flag .rlinks { display: flex; flex-wrap: wrap; gap: 6px 18px; font-weight: 500; }
+.fvis { display: grid; gap: 14px; background: var(--sage-wash); border-radius: 14px; padding: 20px; text-decoration: none; }
+.fc { position: relative; margin: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #fff; box-shadow: 0 10px 28px -14px rgba(30, 36, 32, .35); transition: transform .35s ease; }
+.fc img { display: block; width: 100%; height: auto; }
+.fvis { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 14px; }
+.fc.c1 { grid-column: 1 / -1; }
+.fc.c2, .fc.c3 { margin-top: -34px; z-index: 2; max-height: 250px; }
+.fc.c2 { margin-left: 18px; } .fc.c3 { margin-right: 18px; }
+.fc.c2 img, .fc.c3 img { width: 118%; max-width: none; }
+.fvis:hover .fc.c2 { transform: translateY(-4px); } .fvis:hover .fc.c3 { transform: translateY(-4px); }
+.role { display: flex; align-items: center; gap: 8px; padding: 7px 14px; border-bottom: 1px solid var(--line); background: var(--card); color: var(--ink); font-size: .875rem; font-weight: 700; }
+.role::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
+.card.h { flex-direction: row; align-items: stretch; }
+.card.h .thumb { flex: 0 0 41%; aspect-ratio: auto; border-bottom: 0; border-right: 1px solid var(--line); }
+.card.h .cbody { flex: 1 1 auto; min-width: 0; }
+@media (max-width: 860px) {
+  .flag { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .card.h { flex-direction: column; }
+  .card.h .thumb { flex: none; aspect-ratio: 16 / 9; border-right: 0; border-bottom: 1px solid var(--line); }
+}
+@media (prefers-reduced-motion: reduce) { .fc { transition: none; } }
+
+/* walkthroughs: the screenshot stays in view while the steps scroll past */
+.case { display: grid; grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr); gap: 0 36px; align-items: start; }
+.stage { position: sticky; top: max(24px, 6vh); align-self: start; }
+.frame { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #fff; }
+.frame-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 14px; border-bottom: 1px solid var(--line); background: var(--sage-wash); color: var(--muted); font-size: .8125rem; }
+.shots { position: relative; aspect-ratio: 1500 / 790; background: #fff; }
+.shots img { cursor: zoom-in; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: top center; opacity: 0; transform: scale(1.015); transition: opacity .55s ease, transform .8s ease; }
+.shots img { pointer-events: none; }
+.shots img.on { opacity: 1; transform: none; pointer-events: auto; }
+.dots { display: flex; gap: 8px; padding-top: 14px; }
+.dots button { width: 26px; height: 5px; border: 0; border-radius: 3px; background: var(--line); cursor: pointer; padding: 0; transition: background .3s, width .3s; }
+.dots button.on { background: var(--sage-deep); width: 40px; }
+.steps { display: grid; }
+.step { min-height: 62vh; padding-block: 34px; display: flex; flex-direction: column; justify-content: center; gap: 10px; opacity: .4; transition: opacity .4s; }
+.step.on { opacity: 1; }
+.step .count { color: var(--muted); font-size: .875rem; }
+.step h3 { font-size: 1.5rem; }
+.step p { max-width: 30em; }
+.step img.inline { cursor: zoom-in; display: none; width: 100%; height: auto; aspect-ratio: 1500 / 790; object-fit: contain; object-position: top center; background: #fff; border: 1px solid var(--line); border-radius: 8px; margin-top: 6px; }
+.lb { position: fixed; inset: 0; z-index: 50; background: rgba(10, 14, 11, .84); display: grid; place-items: center; padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); cursor: zoom-out; }
+.lb img { max-width: min(100%, 1500px); max-height: 100%; border-radius: 8px; background: #fff; }
+.lb button { position: absolute; top: max(14px, env(safe-area-inset-top, 0px)); right: max(14px, env(safe-area-inset-right, 0px)); font: inherit; color: #fff; background: transparent; border: 1px solid rgba(255,255,255,.5); border-radius: 999px; padding: 5px 14px; cursor: pointer; }
+.casehead { padding-bottom: 28px; max-width: 40em; }
+.casehead h3 { font-size: 1.75rem; margin-bottom: 8px; }
+.casehead p { color: var(--muted); }
+.casewrap + .casewrap { margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--line); }
+.note { color: var(--muted); font-size: .875rem; padding-top: 6px; }
+
+.outcome { font-family: var(--display); font-size: clamp(1.3rem, 2.4vw, 1.75rem); line-height: 1.3; font-weight: 700; letter-spacing: -0.015em; max-width: 30em; text-wrap: balance; margin: 0; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+.kick { display: block; color: var(--sage-deep); font-weight: 600; font-size: .9375rem; margin-bottom: 4px; }
+.pipe { list-style: none; padding: 0; margin: 18px 0 8px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; }
+.pipe li { position: relative; display: grid; gap: 8px; align-content: start; background: var(--sage-wash); border-radius: 12px; padding: 16px 16px 18px; }
+.pipe li + li::before { content: ""; position: absolute; left: -21px; top: 28px; border: 7px solid transparent; border-left: 10px solid var(--sage-deep); }
+.pipe h4 { margin: 0; font-family: var(--display); font-size: 1rem; font-weight: 700; }
+.pipe p { margin: 0; font-size: .9rem; line-height: 1.5; }
+.pipe .out { padding-top: 8px; border-top: 1px solid var(--line); font-weight: 600; }
+.hyp { margin: 6px 0 0; font-size: .9375rem; color: var(--muted); max-width: 44em; }
+@media (max-width: 860px) { .pipe { grid-template-columns: minmax(0, 1fr); gap: 22px; } .pipe li + li::before { left: 24px; top: -17px; border: 7px solid transparent; border-top: 10px solid var(--sage-deep); } }
+.flow { list-style: none; padding: 0; margin: 16px 0 4px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; max-width: 40em; counter-reset: fl; }
+.flow li { position: relative; background: var(--sage-wash); border-radius: 10px; padding: 12px 14px; font-weight: 600; font-size: .9375rem; line-height: 1.35; }
+.flow li + li::before { content: "\2192"; position: absolute; left: -22px; top: 50%; transform: translateY(-50%); color: var(--sage-deep); font-weight: 700; }
+@media (max-width: 720px) { .flow { grid-template-columns: minmax(0, 1fr); gap: 18px; } .flow li + li::before { content: "\2193"; left: 50%; top: -17px; transform: translateX(-50%); } }
+
+/* company intro */
+details.co { margin-top: 14px; border-top: 1px solid var(--line); padding-top: 12px; }
+details.co summary { cursor: pointer; font-weight: 500; color: var(--sage-deep); list-style: none; display: inline-flex; align-items: center; gap: 8px; }
+details.co summary::-webkit-details-marker { display: none; }
+details.co summary::before { content: "+"; display: inline-grid; place-items: center; width: 20px; height: 20px; border: 1px solid var(--sage); border-radius: 50%; font-size: 14px; line-height: 1; transition: transform .25s; }
+details.co[open] summary::before { content: "\2212"; }
+details.co .cobody { padding-top: 12px; display: grid; gap: 10px; }
+details.co .src { color: var(--muted); font-size: .875rem; }
+
+@media (max-width: 860px) {
+  .case { grid-template-columns: minmax(0, 1fr); }
+  .stage { display: none; }
+  .step { min-height: 0; opacity: 1; padding-block: 22px; }
+  .step img.inline { display: block; }
+}
+@media (max-width: 560px) {
+  #graph { height: 580px; }
+}
+@media (max-width: 860px) {
+  .cards { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 720px) {
+  .panel, .sechead, .row { grid-template-columns: minmax(0, 1fr); }
+  .row h3 { font-size: 1.35rem; }
+  .copybtn { margin: 10px 0 0; display: inline-block; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .node, .link, .node circle, .shots img, .step, .dots button { transition: none; }
+}
+#headed p { white-space: pre-line; }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="#top" data-k="brand">Harper Chen</a>
+    <div class="controls">
+      <button class="ctl" id="langBtn" type="button" aria-label="Switch language">中文</button>
+      <button class="ctl" id="themeBtn" type="button" aria-label="Switch theme" data-k="theme">Theme</button>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+     <div class="htext">
+      <h1 data-k="h1">Hi, I'm Harper Chen.</h1>
+      <p class="lead" data-k="lead" data-html>I’m an NTU graduate interested in how <span class="ul">people</span>, <span class="ul">technology</span>, and <span class="ul">business</span> come together.</p>
+      <p class="sub" data-k="sub">I combine organizational knowledge with programming and data skills to build practical software. I care not only about how systems work, but also how their design affects the people who use them.</p>
+      <ul class="facts">
+        <li data-k="fa1">National Taiwan University
+B.A. in Interdisciplinary Studies of Organizational Behavior and Decision Analytics
+GPA 3.91 / 4.30</li>
+      </ul>
+     </div>
+    </div>
+
+    <section id="contents">
+      <div class="rows">
+        <div class="row">
+          <div><h2 class="sh" data-k="tocHead">What's on this page</h2></div>
+          <div></div>
+        </div>
+      </div>
+      <div class="toc">
+        <a class="tocard" href="#wiq"><h3 data-k="toc1t"></h3><span class="tag" data-k="toc1tag"></span><p data-k="toc1b"></p></a>
+        <a class="tocard" href="#rec"><h3 data-k="toc2t"></h3><span class="tag" data-k="toc2tag"></span><p data-k="toc2b"></p></a>
+        <a class="tocard" href="#more"><span class="tag" data-k="toc3tag"></span><h3 data-k="toc3t"></h3><ul class="tocl"><li data-k="toc3a"></li><li data-k="toc3b2"></li><li data-k="toc3c"></li></ul></a>
+      </div>
+      <p class="tocmore" data-k="tocMore"></p>
+    </section>
+
+    <section id="wiq">
+      <article class="proj">
+        <header class="phead"><h2 class="ptitle">WorkforceIQ</h2><p class="when" data-k="wiqWhen">2026 · Independent project · Fictional data</p></header>
+        <div class="pgrid">
+          <div><h3 class="kick2" data-k="whyH">Why I built it</h3><p class="story" data-k="wiqWhy"></p></div>
+          <div><h3 class="kick2" data-k="whatH">What it is</h3><p data-k="wiqWhat"></p><p class="tech">Python, SQL, SQLite, Streamlit</p><div class="rlinks" id="wiqLinks"></div></div>
+        </div>
+        <div class="rolehead" aria-hidden="false"><div class="cols"><span data-k="colP"></span><span data-k="colH"></span></div></div>
+        <div class="roles">
+          <div class="rcard"><div class="rtop"><svg class="ico" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><circle cx="16" cy="11" r="5.5" fill="currentColor"/><path d="M5 28c0-6.2 4.9-10 11-10s11 3.8 11 10z" fill="currentColor"/></svg><h3 data-k="rEmpT"></h3></div><p class="rwho" data-k="rEmpS"></p><div class="pairs h"><div class="pair"><p class="pain" data-k="eP1"></p><span class="arr" aria-hidden="true"></span><p class="fix" data-k="eF1"></p></div><div class="pair"><p class="pain" data-k="eP2"></p><span class="arr" aria-hidden="true"></span><p class="fix" data-k="eF2"></p></div></div></div>
+          <div class="rcard"><div class="rtop"><svg class="ico" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><circle cx="16" cy="11" r="5.5" fill="currentColor"/><path d="M5 28c0-6.2 4.9-10 11-10s11 3.8 11 10z" fill="currentColor"/><path d="M21.5 5.5l2.2 2.2 4-4" fill="none" stroke="var(--accent)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><h3 data-k="rMgrT"></h3></div><p class="rwho" data-k="rMgrS"></p><div class="pairs h"><div class="pair"><p class="pain" data-k="mP1"></p><span class="arr" aria-hidden="true"></span><p class="fix" data-k="mF1"></p></div><div class="pair"><p class="pain" data-k="mP2"></p><span class="arr" aria-hidden="true"></span><p class="fix" data-k="mF2"></p></div></div></div>
+          <div class="rcard"><div class="rtop"><svg class="ico" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><circle cx="16" cy="11" r="5.5" fill="currentColor"/><path d="M5 28c0-6.2 4.9-10 11-10s11 3.8 11 10z" fill="currentColor"/><path d="M22 26v-5M26 26v-8M30 26v-11" stroke="var(--accent)" stroke-width="2.6" stroke-linecap="round" transform="translate(-4 0)"/></svg><h3 data-k="rHrT"></h3></div><p class="rwho" data-k="rHrS"></p><div class="pairs h"><div class="pair"><p class="pain" data-k="hP1"></p><span class="arr" aria-hidden="true"></span><p class="fix" data-k="hF1"></p></div><div class="pair"><p class="pain" data-k="hP2"></p><span class="arr" aria-hidden="true"></span><p class="fix" data-k="hF2"></p></div></div></div>
+        </div>
+        <details class="co brief" id="wiq-design"><summary data-k="wiqDesign">Design in brief</summary>
+          <div class="cobody">
+            <div class="hood three">
+              <div><span class="kick" data-k="k1"></span><h3 data-k="d1t"></h3><p data-k="d1b"></p></div>
+              <div><span class="kick" data-k="k2"></span><h3 data-k="d2t"></h3><p data-k="d2b"></p></div>
+              <div><span class="kick" data-k="k3"></span><h3 data-k="d3t"></h3><p data-k="d3b"></p></div>
+            </div>
+            <div class="rlinks hoodlinks" id="hoodLinks"></div>
+          </div>
+        </details>
+        <div class="screens">
+          <h3 class="kick2" data-k="screensH">Walk through the screens</h3>
+          <p class="screensSub" data-k="screensSubW"></p><div id="slot-wiq-emp"></div><div id="slot-wiq-mgr"></div><div id="slot-wiq-hr"></div><a class="trybtn" id="tryWiq" target="_blank" rel="noopener" data-k="tryIt"></a>
+        </div>
+      </article>
+    </section>
+
+    <section id="rec">
+      <article class="proj">
+        <header class="phead"><h2 class="ptitle" data-k="recName">AI Recruiting Automation System</h2><p class="when" data-k="recWhen">Feb to Jun 2026, class project with fictional data</p></header>
+        <div class="pgrid">
+          <div><h3 class="kick2" data-k="whyH">Why I built it</h3><p class="story" data-k="recWhy"></p></div>
+          <div><h3 class="kick2" data-k="whatH">What it is</h3><p data-k="recWhat"></p>
+            <p class="tech">Python, Streamlit, Gemini, Google APIs</p><div class="rlinks" id="recLinks"></div></div>
+        </div>
+        <div class="mycontrib"><h3 data-k="recMineH"></h3><p data-k="recMine"></p></div>
+        <div class="wf"><h3 class="kick2 wfh" data-k="wfH"></h3><p class="wfsub" data-k="wfSub"></p><div class="wfgrid"><div class="wfcard"><div class="wftop"><span class="wfn">01</span><h3 data-k="wf1t"></h3><svg class="ico" viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><path d="M7 4h13l5 5v19H7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M11 16h10M11 21h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><div class="wfpain"><span data-k="wfPain"></span><p data-k="wf1p"></p></div><div class="wffix"><span data-k="wfHelp"></span><p data-k="wf1h"></p></div></div><div class="wfcard"><div class="wftop"><span class="wfn">02</span><h3 data-k="wf2t"></h3><svg class="ico" viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><rect x="5" y="7" width="22" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 13h22M11 4v5M21 4v5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><div class="wfpain"><span data-k="wfPain"></span><p data-k="wf2p"></p></div><div class="wffix"><span data-k="wfHelp"></span><p data-k="wf2h"></p></div></div><div class="wfcard"><div class="wftop"><span class="wfn">03</span><h3 data-k="wf3t"></h3><svg class="ico" viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><path d="M6 26V15M13 26V9M20 26V18M27 26V5" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></div><div class="wfpain"><span data-k="wfPain"></span><p data-k="wf3p"></p></div><div class="wffix"><span data-k="wfHelp"></span><p data-k="wf3h"></p></div></div></div></div>
+        <details class="co brief" id="rec-design"><summary data-k="wiqDesign">Design in brief</summary>
+          <div class="cobody rec-principles"><div class="principle"><strong data-k="rd1h"></strong><p data-k="rd1"></p></div><div class="principle"><strong data-k="rd2h"></strong><p data-k="rd2"></p></div><div class="principle"><strong data-k="rd3h"></strong><p data-k="rd3"></p></div></div>
+        </details>
+        <div class="screens"><h3 class="kick2" data-k="screensH">Walk through the screens</h3><p class="screensSub" data-k="screensSub"></p><div id="slot-rec-hr"></div><div id="slot-rec-cand"></div><a class="trybtn" id="tryRec1" target="_blank" rel="noopener" data-k="tryHr"></a><a class="trybtn" id="tryRec2" target="_blank" rel="noopener" data-k="tryBook"></a></div>
+      </article>
+    </section>
+
+    <section id="more">
+      <div class="rows">
+        <div class="row">
+          <div><h2 class="sh" data-k="moreHead">Research and coursework</h2></div>
+          <div></div>
+        </div>
+        <div class="row feature"><span class="rowtag">2026</span>
+          <div><h3 data-k="issmName">Gender bias in AI-assisted résumé rewriting</h3><p class="when" data-k="issmWhen">Institute for Social Science Methodology (ISSM), Academia Sinica, 2026</p><p class="award" data-k="issmAward"></p></div>
+          <div>
+            <p data-k="issmBody"></p>
+            <figure class="swap" aria-label="Illustration of the study idea">
+              <div class="sw-in"><span class="sw-cap" data-k="swCap"></span>
+                <div class="sw-cv"><div class="sw-name"><b data-k="swName">Name</b><span class="sw-opt">Amy</span><span class="sw-or" data-k="swOr">or</span><span class="sw-opt">Andrew</span></div><i></i><i></i><i class="s"></i><small data-k="swSame"></small></div>
+              </div>
+              <span class="sw-arr" aria-hidden="true"></span>
+              <div class="sw-gpt"><b>ChatGPT</b><small data-k="swAsk"></small></div>
+              <span class="sw-arr" aria-hidden="true"></span>
+              <div class="sw-out">
+                <div class="sw-cv"><b>Amy</b><i></i><i></i><i class="s"></i></div>
+                <div class="sw-cv"><b>Andrew</b><i></i><i></i><i class="s"></i></div>
+                <p data-k="swQ"></p>
+              </div>
+            </figure>
+            <p class="hyp" data-k="swD"></p>
+            <ol class="pipe">
+              <li><h4 data-k="pp1h"></h4><p data-k="pp1a"></p><p class="out" data-k="pp1b"></p></li>
+              <li><h4 data-k="pp2h"></h4><p data-k="pp2a"></p><p class="out" data-k="pp2b"></p></li>
+              <li><h4 data-k="pp3h"></h4><p data-k="pp3a"></p><p class="out" data-k="pp3b"></p></li>
+            </ol>
+            <details class="co" id="issm-more"><summary data-k="issmMore">Design in brief</summary>
+              <div class="cobody">
+                <p data-k="is1"></p><p data-k="is2"></p>
+              </div>
+            </details>
+          </div>
+        </div>
+        <div class="row"><span class="rowtag">2025</span>
+          <div><h3 data-k="dbName">Delivery relational database</h3><p class="when" data-k="dbWhen">Sep to Dec 2025, team of 5</p></div>
+          <div>
+            <p data-k="dbBody"></p><p data-k="dbBody2"></p>
+            <p class="tech" data-k="dbTech"></p>
+          </div>
+        </div>
+        <div class="row"><span class="rowtag">2024</span>
+          <div><h3 data-k="clName">Member segmentation and retention analysis</h3><p class="when" data-k="clWhen">NCCU Business Analysis Club, team of 5, I was the lead</p></div>
+          <div>
+            <p data-k="clBody"></p><p data-k="clBody2"></p>
+            <p class="tech" data-k="clTech"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+    <section id="experience">
+      <div class="rows">
+        <div class="row">
+          <div><h2 class="sh" data-k="expHead">Experience</h2></div>
+          <div></div>
+        </div>
+        <div class="row">
+          <div><h3>Delta Electronics</h3><p class="when" data-k="deltaWhen">Talent Acquisition Intern, Jul to Dec 2025</p></div>
+          <div>
+            <p data-k="deltaBody">Ran recruiting workflows in an internal HRIS for 40+ candidates a week. Helped plan and run the 2026 Campus Recruitment Campaign, including booth activities, the campaign theme and giveaways.</p>
+            <p class="tech" id="exp-delta" data-k="deltaCo"></p>
+          </div>
+        </div>
+        <div class="row">
+          <div><h3>RecruitFirst</h3><p class="when" data-k="rfWhen">IT Recruitment Intern, Jun 2024 to Jan 2025</p></div>
+          <div>
+            <p data-k="rfBody">Generated over NTD 100,000 in revenue in one quarter, the only Taipei-office intern above that level at the quarter-end awards. Placed engineers for semiconductor and technology clients, and turned technical job requirements into structured screening criteria.</p>
+            <p class="tech" id="exp-rf" data-k="rfCo"></p>
+          </div>
+        </div>
+        <div class="row">
+          <div><h3 data-k="clubName">NCCU Business Analysis Club</h3><p class="when" data-k="clubWhen">Vice President 2024 to 2025, HR Director 2023 to 2024</p></div>
+          <div><p data-k="clubBody">Led member recruitment, HR operations, and external relations. Organized two career networking events featuring over 16 speakers and attracting more than 70 participants in total.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <div class="rows">
+        <div class="row">
+          <div><h2 class="sh" data-k="aboutHead">Background</h2></div>
+          <div></div>
+        </div>
+        <div class="row">
+          <div><h3 data-k="eduName">Education</h3><p class="when" data-k="eduWhen">Sep 2021 to Jun 2026</p></div>
+          <div>
+            <ul class="edu"><li data-k="edu1"></li><li data-k="edu2"></li><li data-k="edu3"></li></ul>
+            <p class="tech" data-k="eduNote"></p>
+            <p class="tech" data-k="eduCourses">Programming for Business Computing, Database Management Systems, Data Visualization with Modern Data Science, Social Statistics.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="connect">
+      <div class="graphhead">
+        <h2 class="sh" data-k="connectHead">How it all connects</h2>
+        <p class="hint" data-k="hint" style="padding:0">Select a dot to explore its connections, or drag the dots.</p>
+      </div>
+      <div class="graphwrap">
+        <svg id="graph" role="group" aria-label="Interactive map connecting my experience, projects and research"></svg>
+      </div>
+      <div class="legend" aria-hidden="true">
+        <span><i class="lg-work"></i><b style="font-weight:500" data-k="lgWork">Projects</b></span>
+        <span><i class="lg-res"></i><b style="font-weight:500" data-k="lgRes">Research</b></span>
+        <span><i class="lg-exp"></i><b style="font-weight:500" data-k="lgExp">Experience</b></span>
+      </div>
+      <div class="panel" aria-live="polite">
+        <h3 id="pTitle"></h3>
+        <div>
+          <p class="pbody" id="pBody"></p>
+          <div class="plinks" id="pLinks"></div>
+          <div class="connections" id="pConnections" hidden></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="headed">
+      <div class="rows">
+        <div class="row">
+          <div><h3 data-k="headT">Where I'm headed</h3></div>
+          <div><p data-k="headB"></p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="rows">
+        <div class="row">
+          <div><h2 class="sh" data-k="contactHead">Contact</h2></div>
+          <div></div>
+        </div>
+        <div class="row">
+          <div></div>
+          <div>
+            <p><span class="big" id="emailText"></span><button class="ctl copybtn" id="copyBtn" type="button" data-k="copy">Copy</button></p>
+            <div class="clinks" id="contactLinks"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Screenshot"><img id="lbImg" alt=""><button type="button" id="lbClose" data-k="close">Close</button></div>
+
+  <footer data-k="footer">© 2026 Te-Chi (Harper) Chen</footer>
+</div>
+
+<script>
+/* Everything you may want to change lives in LINKS and I18N. An empty link is hidden. */
+const LINKS = {
+  email: "techichen0324@gmail.com",
+  github: "https://github.com/harper-chen",
+  linkedin: "",
+  wiqDemo: "https://workforceiq-demo.streamlit.app/",
+  wiqCode: "https://github.com/harper-chen/WorkforceIQ",
+  recDemo: "https://harper-hr-dashboard.streamlit.app/",
+  recBooking: "https://harper-interview-booking.streamlit.app/",
+  recCode: "https://github.com/harper-chen/ai-recruiting-automation",
+  wiqEr: "https://github.com/harper-chen/WorkforceIQ/blob/main/docs/er-diagram.md", wiqTests: "https://github.com/harper-chen/WorkforceIQ/tree/main/tests", wiqCi: "https://github.com/harper-chen/WorkforceIQ/actions/workflows/tests.yml",
+  wiqWalk: "#wiq-emp", recWalk: "#rec-hr", coDelta: "#exp-delta", coRf: "#exp-rf"
+};
+
+const I18N = {
+  en: {
+    brand: "Harper Chen", theme: "Theme", copy: "Copy", copied: "Copied", wiqTitle: "WorkforceIQ",
+    swCap: "Same résumé, different names", swOr: "or", swName: "Name:", swSame: "Skills, jobs and wording of the input are identical.", swAsk: "Asked to polish the résumé", swQ: "Does the rewrite differ by name? What was added, deleted or reworded?",
+    lead: "I’m an NTU graduate interested in how <span class=\"ul\">people</span>, <span class=\"ul\">technology</span>, and <span class=\"ul\">business</span> come together.",
+    eP1: "Which internal roles could I pursue, and how can I prepare?", eF1: "Compare recorded skills with role requirements to see match scores, skill gaps, and relevant training.",
+    eP2: "Can I explore new roles privately?", eF2: "Keep career interests private, or choose which hiring managers can see them.",
+    eP3: "I want to explore another position without telling every manager.", eF3: "Career interests stay private unless I choose to share them with the managers hiring for a specific role.",
+    mP1: "Who within the company might fit my opening?", mF1: "Review employees who shared their interest, including skill matches and readiness indicators.",
+    mP2: "Should I consider internal talent or recruit externally?", mF2: "See recommendations for internal mobility, further assessment, or external hiring. Final decisions remain with people.",
+    hP1: "Can our training programs address future skill gaps?", hF1: "Identify skills that existing courses cannot develop to the levels required.",
+    hP2: "What happens if we need more employees in certain roles?", hF2: "Adjust future headcount targets to see how staffing gaps change across roles.",
+    recWhat: "This prototype automates repetitive recruiting tasks while supporting human hiring decisions. Recruiters set screening criteria, AI interprets résumés, and rule-based scoring helps identify candidates for review. Automated interview scheduling and a recruiting dashboard further reduce administrative work.",
+    cW1: "Recruiter", cW2: "Hiring manager", cW3: "Applicant", cW4: "Recruiter",
+    cP1: "Reviewing every application manually takes time, and screening standards can vary.", cF1: "Recruiters set screening rules; AI checks which apply. Software—not AI—calculates points from a starting score of 70.",
+    cP2: "An automated score may miss important context about an applicant.", cF2: "Managers review scoring reasons and may reconsider candidates before rejection emails are sent.",
+    cP3: "Finding a time that works for candidates and interviewers takes repeated messages.", cF3: "Candidates select an available slot; the system checks the calendar before booking.",
+    cP4: "The team needs a clear view of where candidates leave the process.", cF4: "A dashboard shows stage-by-stage numbers; AI explains summaries without accessing personal candidate data.",
+    tocHead: "What's on this page",
+    toc1tag: "Solo project · 2026", toc1t: "WorkforceIQ", toc1b: "A prototype that connects employees’ skills, internal job opportunities, and company training. See how employees, hiring managers, and HR use the same information differently.",
+    toc2tag: "Team of 4 (leader) · 2026", toc2t: "AI Recruiting Automation System", toc2b: "A system that automates repetitive recruiting tasks, including initial résumé screening and interview scheduling, while tracking recruiting progress and keeping hiring decisions in human hands.",
+    toc3tag: "2024–2026", toc3t: "Research and other projects", toc3b: "A proposed study of AI résumé rewriting, a food-delivery database, and a customer-membership analysis.",
+    tocMore: "After the projects: my experience, how everything connects, and where I'm headed.",
+    whyH: "Why I built it", whatH: "What it is",
+    wiqWhy: "During my HR internship at Delta Electronics, I became interested in how companies connect employee training with internal career opportunities. Employees may develop new skills without knowing which roles they could pursue, while managers may overlook existing talent when filling openings. I built WorkforceIQ to explore how these disconnected decisions could be better supported by technology.",
+    wiqWhat: "WorkforceIQ is a workforce planning and internal mobility prototype designed to make career development and staffing decisions easier. Employees can explore potential roles, compare their recorded skills with job requirements, and find relevant training. Hiring managers can discover interested internal candidates, while HR can identify future staffing and training gaps. Built with synthetic data, WorkforceIQ supports human decisions rather than making staffing decisions automatically.",
+    rEmpT: "Employee", rEmpS: "Explores internal career opportunities and ways to prepare for them.", rEmp1: "Compares documented skills and proficiency levels with other internal roles.", rEmp2: "Sees where records show a gap, where information is missing, and which courses could help.", rEmp3: "Controls which hiring managers can see interest in each saved role.",
+    rMgrT: "Hiring Manager", rMgrS: "Evaluates interested employees for open positions.", rMgr1: "Sees only the openings assigned to them.", rMgr2: "Reviews documented matches, readiness labels, and explanations rather than only a score.", rMgr3: "Makes the actual hiring decision; the prototype never selects or transfers people.",
+    rHrT: "HR", rHrS: "Connects future staffing needs with internal training.", rHr1: "Compares current and planned headcount for each role.", rHr2: "Identifies required skills that current training cannot develop to the needed level.", rHr3: "Can change the planned numbers to test different scenarios.",
+    wiqDesign: "Design in brief", screensH: "Walk through each user's view",
+    walkRec: "Recruiter & Hiring Manager View ({n})", walkCand: "Applicant View ({n})",
+    walkEmp: "Employee View ({n})", walkMgr: "Hiring Manager View ({n})", walkHr: "HR View ({n})",
+    recWhy: "During my HR internship at Delta Electronics, I saw how repetitive tasks like résumé screening, candidate communication, and interview scheduling consumed recruiters' time. Screening specialized roles also required technical knowledge recruiters might not always have. These challenges inspired me to explore how AI and automation could reduce routine work while preserving human judgment.",
+    recMine: "I led the four-person team, designed the recruiting workflow, developed the recruiter interface and Google API integrations, and integrated my teammates' code.",
+    howH: "How it works",
+    how1: "Screen. Recruiters define criteria, AI interprets résumé information, and the application calculates rule-based scores from a 70-point baseline.",
+    how2: "Review. Candidates scoring at least 60 reach a manager. Lower-scoring candidates have a 48-hour window for human reconsideration before a rejection email.",
+    how3: "Schedule. Approved candidates pick a slot based on interviewer availability.",
+    how4: "Analyze. A dashboard tracks the stages of recruiting; AI explains only summary figures, not personal records.",
+    rd1h: "Transparent Scoring", rd1: "Gemini identifies applicable criteria, while the application calculates scores. Recruiters can test the rules on sample résumés.",
+    rd2h: "Human Oversight", rd2: "Hiring managers can inspect scoring reasons and reconsider candidates before rejection emails are sent.",
+    rd3h: "Privacy Separation", rd3: "AI-generated analytics summaries use aggregated metrics, not candidate names, email addresses, or résumé text.",
+    lgRes: "Research",
+    h1: "Hi, I'm Harper Chen.",
+    sub: "I combine organizational knowledge with programming and data skills to build practical software. I care not only about how systems work, but also how their design affects the people who use them.",
+    hint: "Select a dot to explore its connections, or drag the dots.",
+    ctaDemo: "See what's here", ctaContact: "Get in touch", moreHead: "Research and other projects", connectHead: "How it all connects",
+    wiqC1: "Employee, manager and HR views", wiqC2: "Rules explained on the page", wiqC3: "Employees control who sees their interests",
+    recC1: "Team of 4 (leader)", recC2: "Résumé to interview in one workflow", recC3: "2 live demos",
+    lgWork: "Projects", lgExp: "Experience", lgTheme: "Themes", lgSkill: "Skills",
+    pDefaultT: "Start anywhere", pDefaultB: "Each dot represents a project, research proposal, or experience. Select one to highlight its direct connections and read its story.",
+    screensSub: "See how the AI Recruiting Automation System supports recruiters, hiring managers, and candidates through screenshots from the prototype. All data is fictional.", tryHr: "Try it yourself: HR command center", tryBook: "Try it yourself: applicant booking",
+    toc3a: "Research proposal: Gender bias in AI-assisted résumé rewriting", toc3b2: "Course project: Food-delivery relational database", toc3c: "NCCU Business Analysis Club: Member segmentation and retention analysis",
+    edu1: "National Taiwan University",
+    edu2: "B.A. in Interdisciplinary Studies of Organizational Behavior and Decision Analytics",
+    edu3: "GPA 3.91 / 4.30",
+    eduNote: "A self-designed interdisciplinary degree combining organizational behavior, information systems, and quantitative analysis.",
+    issmAward: "The Chi Huang Scholarship · Outstanding final presentation",
+    colP: "User's Problem",
+    colH: "How WorkforceIQ Helps",
+    screensSubW: "See how WorkforceIQ supports employees, hiring managers, and HR through screenshots from the prototype. All data is fictional.",
+    recMineH: "My Contribution",
+    wfH: "How the Recruiting Workflow Works",
+    wfSub: "Three stages, from initial screening to recruiting analytics.",
+    wfPain: "Pain Point",
+    wfHelp: "How the System Helps",
+    wf1t: "Initial Screening",
+    wf1p: "Manual résumé screening is time-consuming, especially when recruiters must assess unfamiliar technical requirements.",
+    wf1h: "Recruiters define criteria, AI interprets résumés, and the system calculates rule-based scores. Hiring managers review the results and can reconsider candidates before rejection.",
+    wf2t: "Interview Scheduling",
+    wf2p: "Coordinating availability takes repeated emails.",
+    wf2h: "Candidates choose available slots, which the system verifies before booking.",
+    wf3t: "Recruiting Analytics",
+    wf3p: "Tracking candidate progress across stages can be difficult.",
+    wf3h: "A dashboard tracks each stage, with AI-assisted summaries of recruiting patterns.",
+    r8t: "Ariel sees the booking confirmation",
+    r8b: "The selected time and meeting details appear with a confirmation email preview.",
+    swD: "Change only the applicant's name (e.g., Amy or Andrew), keeping all other résumé details identical. Ask ChatGPT to rewrite each version, then examine whether the wording differs.",
+    dbBody2: "I helped define business rules and wrote SQL queries at three difficulty levels, including an analysis of restaurants with below-average order counts and ratings.",
+    dbTech: "SQL · MySQL · ER Modeling · Database Normalization",
+    clBody2: "One finding was that after achieving platinum status, members visited 20% less often and spent 15% less per visit compared with the previous year. I led the team, contributed to data cleaning, and developed segment-specific marketing recommendations and the final presentation.",
+    clTech: "RFM Analysis · Customer Segmentation · Retention Strategy",
+    tryIt: "Live demo: try it yourself", demo: "Live demo", code: "Code", booking: "Interview booking demo", cc: "Command center demo",
+    workHead: "Selected work", expHead: "Experience", aboutHead: "Background", contactHead: "Contact",
+    wiqWhen: "2026 · Independent project · Fictional data", wiqBody: "Decision support for career mobility, internal staffing and workforce planning. It shows missing data as missing instead of as a skill gap, lets employees choose who sees their career interests, and leaves every staffing decision to people.",
+    recName: "AI Recruiting Automation System", recWhen: "Feb–Jun 2026 · Four-person course project · Fictional data",
+    recBody: "AI-assisted résumé screening, manager review, email routing, interview booking and recruiting analytics in one workflow. I designed the scoring rule: every candidate starts at 70 points, Gemini lists which editable rules applied, and the code does the arithmetic. Managers can reconsider candidates below the screening threshold before rejection emails are sent. I led the team, designed the command center web app and integrated everyone's code.",
+    issmName: "Gender Bias in AI-Assisted Résumé Rewriting",
+    issmWhen: "Institute for Social Science Methodology (ISSM), Academia Sinica",
+    issmBody: "Could gender-signaling names influence how ChatGPT rewrites résumés and how recruiters evaluate the results? At Academia Sinica's 2026 ISSM, I presented a three-stage research proposal investigating this question.",
+    fl1: "Gender signal in a name", fl2: "Differences in ChatGPT's rewrite", fl3: "Differences in hiring evaluation", issmMore: "Research design and status",
+    pp1h: "Study 1: Select gender-signaling names", pp1a: "Start with 60 Taiwanese names and use human and GPT ratings to assess perceived gender.", pp1b: "Planned outcome: Select 26 names, balanced by perceived gender while limiting differences in perceived age and socioeconomic background.",
+    pp2h: "Study 2: Analyze AI-generated rewrites", pp2a: "Pair 21 base résumés with 26 names and generate two rewrites per combination.", pp2b: "Planned outcome: Analyze 1,092 rewrites for differences in wording, including agency and communion.",
+    pp3h: "Study 3: Evaluate hiring judgments", pp3a: "Ask approximately 40 HR professionals to compare anonymized pairs of rewritten résumés.", pp3b: "Planned outcome: Examine whether differences in AI-generated wording influence interview recommendations.",
+    ppH: "H1: the gender signal in a name changes how ChatGPT rewrites a résumé. H2: those rewrites change how HR professionals evaluate it.",
+    is1: "The proposed analyses use negative-binomial mixed-effects models for rewriting patterns and ordinal or logistic mixed-effects models for hiring evaluations.",
+    is2: "This project is a completed research proposal, not an empirical study. Data collection and hypothesis testing have not been conducted. Planned limitations include using a single AI model, selected gender-signaling names, and synthetic résumés.",
+    is3: "Proposed Stage 3—recruiter evaluation: approximately 40 HR participants would rate anonymized résumé pairs. Planned analyses include cumulative-link and logistic mixed-effects models.",
+    is4: "Project status: research proposal and analysis plan completed; data collection and hypothesis testing have not been conducted. Planned limitations include one AI model, selected gender-signaling names, and synthetic résumés.",
+    clName: "Member Segmentation & Retention Analysis", clWhen: "NCCU Business Analysis Club\nFive-person team (leader)",
+    clBody: "Our five-person team analyzed approximately two million transactions from over 120,000 members of an indoor sports and entertainment venue chain (2015–2023). Using RFM and purchase behavior analysis, we identified member segments and developed targeted retention strategies.",
+    dbName: "Food-Delivery Relational Database", dbWhen: "Five-person course project",
+    dbBody: "Our team designed a 13-table MySQL database for a fictional food-delivery service, modeling restaurants, orders, and related records while minimizing data redundancy and inconsistencies. We normalized the database to third normal form (3NF), documented its structure with an entity–relationship diagram, and tested it using generated data and nine SQL queries.",
+    deltaWhen: "Talent Acquisition Intern\nJul–Dec 2025",
+    deltaBody: "Supported recruitment for over 40 candidates weekly using an internal HR information system, including candidate tracking and interview coordination. Helped plan the 2026 campus recruitment campaign. The experience also sparked my interest in automating repetitive recruiting tasks and connecting employee development with workforce planning.",
+    rfWhen: "IT Recruitment Intern\nJun 2024–Jan 2025",
+    rfBody: "Sourced candidates for semiconductor and technology positions, translating technical job requirements into practical search and screening criteria. Generated over NT$100,000 in quarterly revenue and received recognition at the Taipei office's quarterly awards.",
+    clubName: "NCCU Business Analysis Club", clubWhen: "Vice President · 2024–2025\nHR Director · 2023–2024",
+    clubBody: "Led member recruitment, HR operations, and external relations. Organized two career networking events featuring over 16 speakers and attracting more than 70 participants in total.",
+    whereName: "Where WorkforceIQ started",
+    whereBody: "My HR internship at Delta Electronics sparked my interest in how companies connect employee development with internal career opportunities. WorkforceIQ explores how technology can bring skill records, job requirements, and training options together while giving employees control over their career interests.",
+    eduName: "Education", eduWhen: "Sep 2021–Jun 2026",
+    eduBody: "National Taiwan University. B.A. in Interdisciplinary Studies of Organizational Behavior and Decision Analytics, a self-designed program combining organizational behavior, information systems and statistics. GPA 3.91 / 4.30.",
+    eduCourses: "Relevant Coursework: Programming for Business Computing · Database Management Systems · Data Visualization with Modern Data Science · Social Statistics",
+    contactName: "Let's talk", contactBody: "I welcome conversations about information systems, human-centered technology, learning, and the responsible use of data in organizations.",
+    footer: "© 2026 Te-Chi (Harper) Chen",
+    close: "Close", walkHead: "See how they work", walkIntro: "Open one and scroll. All data is fictional.",
+    walk: "See the screens", aboutCo: "About the company", source: "Source", stepWord: "Step", ofWord: "of", fiction: "Fictional demo data",
+    w1t: "River reviews recorded skills", w1b: "River Hsu is a Business Analyst with 12 recorded skills. The profile shows proficiency levels and last update dates, with search and filtering options.",
+    w4t: "River explores relevant training", w4b: "The Learning Catalog contains 67 internal courses, showing the skills they develop, target proficiency levels, duration, and prerequisites.",
+    w5t: "River controls who sees career interests", w5b: "Career interests are private by default. River chooses whether to share interest in a role with its hiring managers.",
+    story: "During my HR internship at Delta Electronics, I began to ask how employees could make better use of the skills they developed through training when exploring internal career opportunities. That question helped inspire WorkforceIQ.",
+    probH: "The problem", prob: "Training progress stays invisible. Employees cannot tell which roles fit them, managers cannot tell who is close to ready, and HR cannot tell where training falls short.",
+    supH: "What it supports", sup: "Employees choose who sees their interests. Managers get a readiness label with its reasoning, and HR sees the gaps training cannot close. People make every decision.",
+    builtH: "What I built", built: "The SQLite data model, the Skill Match rules and three Streamlit workspaces.",
+    roleEmp: "Employee", roleMgr: "Hiring manager", roleHr: "HR",
+    fa1: "National Taiwan University\nB.A. in Interdisciplinary Studies of Organizational Behavior and Decision Analytics\nGPA 3.91 / 4.30", fa2: "The Chi Huang Scholarship, ISSM 2026", fa3: "Only intern in RecruitFirst's Taipei office above NTD 100K in a quarter",
+    hoodHead: "Design decisions", hoodLead: "Why WorkforceIQ works the way it does.",
+    k1: "Privacy", k2: "Explainability", k3: "Data Integrity",
+    d1t: "Employees control who sees their career interests", d1b: "Exploring another role can be sensitive. Career interests are private by default, and employees decide whether to share their interest with the hiring managers for each specific role.",
+    d2t: "Rules you can understand, not a black box", d2b: "Skill Match scores and readiness labels are based on visible skill requirements and defined rules. Employees and hiring managers can see how results are calculated rather than relying on unexplained recommendations.",
+    d3t: "Missing skill records are not treated as missing abilities", d3b: "When an employee's skill proficiency is not recorded, the system excludes it from verified matches and labels it \"Not recorded\" rather than assuming the employee lacks the skill.",
+    headT: "Where I'm headed", headB: "I want to build technology that helps people and organizations work more effectively and make better decisions. My projects have shown me how organizational problems can be translated into working software, while also raising questions about usability, reliability, and the decisions these systems support.\n\nIn graduate school, I hope to deepen my technical skills and learn to build more robust systems beyond individual prototypes. Long term, I aim to work at the intersection of software, information systems, and human-centered technology, building tools that address real organizational needs.",
+    hoodEr: "ER diagram", hoodTests: "Tests", hoodCi: "CI runs",
+    walkSum: "Step-by-step walkthrough ({n} steps)",
+    wiqLead: "One scenario followed across three roles: an employee, the manager with an open role, and HR.",
+    recLead: "One applicant's path from résumé to interview, and what HR sees afterwards.",
+    deltaCo: "A Taiwan-headquartered global leader in power electronics and thermal management, with over 80,000 employees worldwide.",
+    rfCo: "Recruitment agency within HRnetGroup, operating across the Asia-Pacific region.",
+    w2t: "River explores internal career options", w2b: "Career Exploration compares River's recorded skills with role requirements to calculate a Skill Match score. River can explore roles and see how each score is calculated.",
+    w3t: "Skill gaps and missing records are distinguished", w3b: "For the Systems Analyst role, WorkforceIQ distinguishes recorded skill gaps from missing records, which may lower the match score but do not prove a lack of ability. Relevant training is suggested where available.",
+    w6t: "Riley reviews an assigned opening", w6b: "Riley Chang manages a Systems Analyst opening. The dashboard shows assigned openings and their status, while leaving staffing decisions to people.",
+    w7t: "Riley evaluates internal staffing options", w7b: "River appears because River chose to share an interest in the role. WorkforceIQ shows a Skill Match score and recommends Internal Mobility with a Train First label, leaving the decision to Riley.",
+    w8t: "HR explores future staffing needs", w8b: "HR compares current and planned headcount to identify staffing gaps and adjusts targets to explore different scenarios.",
+    w9t: "HR identifies role capability gaps", w9b: "Across existing roles, WorkforceIQ highlights skills that the current internal learning catalog cannot develop to the required proficiency level.",
+    r1t: "The recruiter sets screening rules", r1b: "The recruiter loads a job description and defines criteria. Gemini identifies applicable rules; the application calculates each score from a 70-point baseline.",
+    r2t: "The hiring manager reviews candidates", r2b: "The manager reviews scores and reasons, selects candidates to interview, and can reconsider low-scoring applicants before rejection emails go out.",
+    r3t: "Email notifications are queued", r3b: "Interview invitations and rejection emails appear in separate queues, with visibility into what is scheduled to be sent.",
+    r4t: "An interview invitation is prepared", r4b: "A personalized interview invitation is prepared for Ariel, including a booking link.",
+    r5t: "Ariel chooses an interview slot", r5b: "The booking link pre-fills Ariel's name and email. Ariel selects a time, and the system verifies availability before booking.",
+    r6t: "Recruiters review the hiring funnel", r6b: "The dashboard tracks applicants, interviews, and hires, showing conversion patterns and where candidates drop out.",
+    r7t: "AI explains recruiting patterns", r7b: "The app calculates the metrics; AI summarizes them without receiving candidates' names, emails, or résumés.",
+    n: {
+      me: ["Harper", "I studied organizational behavior and decision analytics at NTU alongside programming, databases, and statistics. My projects explore how to turn organizational problems into practical, human-centered software."],
+      p_wiq: ["WorkforceIQ", "An independent workforce planning and internal mobility prototype linking recorded skills, internal roles, training, and staffing needs. Employees explore career options, managers review interested internal talent, and HR examines future gaps. Built with synthetic data and AI coding assistance."],
+      p_rec: ["Recruiting Automation", "A four-person course prototype that automates repetitive recruiting tasks. Recruiters define criteria, Gemini interprets résumé information, and software calculates rule-based scores. Managers retain review authority, while candidates can book interviews."],
+      p_db: ["Delivery Database", "A five-person course project designing a 13-table, 3NF MySQL database for a fictional food-delivery service. I helped define business rules and wrote queries at three difficulty levels."],
+      r_issm: ["ISSM Research", "A three-stage research proposal presented at Academia Sinica’s ISSM on whether gender-signaling names affect ChatGPT résumé rewrites and subsequent hiring evaluations. Recognized with The Chi Huang Scholarship for the final presentation; no empirical results are claimed."],
+      e_delta: ["Delta Electronics", "As a talent acquisition intern, I supported recruitment for over 40 candidates weekly and helped plan the 2026 campus recruitment campaign. The experience sparked questions about recruiting automation and how training might connect to internal career opportunities."],
+      e_rf: ["RecruitFirst", "As an IT recruitment intern, I sourced candidates for semiconductor and technology roles and translated technical requirements into search and screening criteria. I generated over NT$100,000 in quarterly revenue."],
+      e_club: ["NCCU Business Analysis Club", "I served as HR Director and then Vice President, organizing member recruitment and two career networking events. I also led a five-person team in the Member Segmentation & Retention Analysis project."],
+    }
+  },
+  zh: {
+    brand: "Harper Chen", theme: "主題", copy: "複製", copied: "已複製", wiqTitle: "WorkforceIQ",
+    swCap: "同一份履歷，不同姓名", swOr: "或", swName: "姓名：", swSame: "技能、經歷與原文完全相同。", swAsk: "請它潤飾履歷", swQ: "潤飾結果會因名字而不同嗎？增加、刪除或改寫了什麼？",
+    lead: "我是臺灣大學畢業生，關注<span class=\"ul\">人</span>、<span class=\"ul\">科技</span>與<span class=\"ul\">商業</span>如何結合。",
+    eP1: "我適合哪些內部職位？該如何準備？", eF1: "比較已記錄的技能與職位要求，查看匹配程度、技能差距及相關培訓課程。",
+    eP2: "我可以私下探索其他職位嗎？", eF2: "職涯興趣預設不公開，由員工自行決定哪些職位的招募主管可以查看。",
+    eP3: "我想了解其他職缺，但還不想讓所有主管知道。", eF3: "職涯意向預設保密；只有我同意，特定職缺的主管才能看到。",
+    mP1: "公司內有哪些員工可能適合我的職缺？", mF1: "查看主動公開轉職意願的員工，以及其技能匹配程度與職位準備度。",
+    mP2: "我應該考慮內部人才，還是對外招募？", mF2: "查看內部轉調、進一步評估或外部招募的建議，最終決策仍由人員負責。",
+    hP1: "現有培訓能補足未來的技能缺口嗎？", hF1: "找出現有課程無法培養至職位要求等級的技能。",
+    hP2: "如果公司未來需要增加某些職位的人數，會產生什麼影響？", hF2: "調整未來各職位的人力編制目標，查看人力缺口如何變化。",
+    recWhat: "這個原型將重複性的招募工作自動化，同時輔助人為的錄用決定。招募人員設定篩選條件，AI 解讀履歷，並由規則式評分協助找出值得審查的候選人。自動化的面試預約與招募儀表板，進一步減少行政工作。",
+    cW1: "招募人員", cW2: "用人主管", cW3: "應徵者", cW4: "招募人員",
+    cP1: "逐份閱讀和評分履歷很花時間，標準也可能不一致。", cF1: "招募人員設定篩選規則，AI 判斷適用項目；實際加減分由程式從 70 分起算。",
+    cP2: "一個自動分數可能忽略候選人的其他背景。", cF2: "主管查看評分理由，並可在婉拒信寄出前重新審查候選人。",
+    cP3: "候選人和面試官要來回確認時間，耗費不少溝通。", cF3: "候選人選擇可預約時段；系統再次確認行事曆後才完成預約。",
+    cP4: "招募團隊需要知道候選人在哪些階段流失。", cF4: "儀表板顯示各階段人數；AI 僅解釋彙總資訊，不接觸候選人個資。",
+    tocHead: "這個網頁有什麼",
+    toc1tag: "個人專案 · 2026", toc1t: "WorkforceIQ", toc1b: "串連員工技能、公司內部職缺與培訓課程的原型。從員工、用人主管與 HR 三種角度看同一套資訊。",
+    toc2tag: "4 人團隊（組長）· 2026", toc2t: "AI 招募自動化系統", toc2b: "自動化重複性的招募工作（包括初步履歷篩選與面試排程），同時追蹤招募進度，並讓招聘決策保留在人的手中。",
+    toc3tag: "2024–2026", toc3t: "研究與其他專案", toc3b: "AI 履歷改寫的研究提案、外送平台資料庫，以及會員消費分析。",
+    tocMore: "專案之後是我的經歷、各項目之間的關聯，以及我接下來想前往的方向。",
+    whyH: "我為什麼做它", whatH: "它是什麼",
+    wiqWhy: "在台達電子擔任人資實習生期間，我開始關注企業如何將員工培訓與內部職涯發展機會連結起來。員工即使培養了新技能，也可能不清楚自己可以朝哪些職位發展；而當公司出現職缺時，主管也可能忽略具有潛力的內部人才。因此，我開發 WorkforceIQ，探索如何透過科技更有效地串聯這些原本分散的決策。",
+    wiqWhat: "WorkforceIQ 是一套人力規劃與企業內部人才流動的原型系統，旨在讓員工職涯發展與企業人才配置更加便利。員工可以探索公司內部的職位機會、比較自身已記錄的技能與職位要求，並找到相關培訓課程；用人主管可以尋找有內部轉職意願的員工，而人資部門則能辨識未來的人力需求與技能培訓缺口。WorkforceIQ 使用模擬資料開發，目的是輔助人員做出決策，而不是由系統自動決定人才配置。",
+    rEmpT: "員工", rEmpS: "探索公司內部的職涯機會與所需準備。", rEmp1: "比對自己的已記錄技能與其他職務的技能要求。", rEmp2: "分清楚真正的技能落差與尚無紀錄的部分，並查看適用課程。", rEmp3: "針對每個收藏的職務，決定是否公開意向。",
+    rMgrT: "用人主管", rMgrS: "評估對內部職缺有興趣的員工。", rMgr1: "只看到分配給自己的職缺。", rMgr2: "不只看分數，也看技能配對、準備度標籤與依據。", rMgr3: "實際錄用或調動仍由主管決定，原型不自動選人。",
+    rHrT: "人資部門", rHrS: "連結未來人力需求與企業內部培訓。", rHr1: "比較每個職位的現有與規劃人數。", rHr2: "找出現有課程無法培養至職務需求等級的技能。", rHr3: "可以調整規劃人數，測試不同情境。",
+    wiqDesign: "設計取捨", screensH: "逐一看各角色的畫面",
+    walkRec: "招募人員與用人主管視角（{n}）", walkCand: "應徵者視角（{n}）",
+    walkEmp: "員工視角（{n}）", walkMgr: "用人主管視角（{n}）", walkHr: "HR 視角（{n}）",
+    recWhy: "在台達電子的 HR 實習期間，我看到履歷篩選、與候選人溝通和安排面試這些重複性工作，佔去招募人員許多時間。篩選專業職位還需要招募人員不一定具備的技術知識。這些挑戰讓我想探索：AI 與自動化如何在保留人為判斷的同時，減少例行工作。",
+    recMine: "我擔任四人團隊的組長，設計招募流程，開發招募人員介面與 Google API 整合，並整合隊友的程式碼。",
+    howH: "怎麼運作",
+    how1: "初篩。招募人員設定條件，AI 判讀履歷，程式以 70 分為起點計算分數。",
+    how2: "覆核。60 分以上交給主管；較低分者在 48 小時內仍可由主管重新考慮，之後才寄出婉拒信。",
+    how3: "預約。獲邀者依面試官可用時段自行選擇時間。",
+    how4: "分析。儀表板統整招募流程，AI 僅解釋彙總數字，不接收個人履歷。",
+    rd1h: "透明評分", rd1: "Gemini 判斷適用的條件，由程式計算分數；招募人員可用測試履歷確認規則。",
+    rd2h: "人工覆核", rd2: "用人主管可查看評分理由，並在寄出婉拒信前重新考慮候選人。",
+    rd3h: "隱私區隔", rd3: "AI 招募分析摘要僅使用彙總統計資料，不接收候選人的姓名、電子郵件或履歷文字。",
+    lgRes: "研究",
+    h1: "嗨，我是陳德淇（Harper）。",
+    sub: "我結合組織知識與程式、資料技能，打造實用的軟體。我關心的不只是系統如何運作，也包括它們的設計如何影響使用者。",
+    hint: "點選圓點探索相關經歷與專案，也可以拖曳圓點。",
+    ctaDemo: "看看這裡有什麼", ctaContact: "聯絡我", moreHead: "研究與其他專案", connectHead: "它們如何連在一起",
+    wiqC1: "員工、主管、HR 三種視角", wiqC2: "規則在頁面上說明", wiqC3: "員工自己決定誰能看到職涯意向",
+    recC1: "4 人團隊（組長）", recC2: "從履歷到面試的完整流程", recC3: "2 個線上 Demo",
+    lgWork: "專案", lgExp: "經歷", lgTheme: "主題", lgSkill: "技能",
+    pDefaultT: "從哪裡開始都可以", pDefaultB: "每個圓點代表專案、研究提案或經歷。點選圓點可突顯直接相關的連線並閱讀介紹。",
+    screensSub: "透過原型的截圖，了解 AI 招募自動化系統如何支援招募人員、用人主管與應徵者。（所有資料皆為虛構）", tryHr: "自己試試看：HR 指揮中心", tryBook: "自己試試看：應徵者預約",
+    toc3a: "研究提案：AI 輔助履歷改寫中的性別偏誤", toc3b2: "課堂專案：外送平台關聯式資料庫", toc3c: "政大商業分析社：會員分群與留存分析",
+    edu1: "國立臺灣大學",
+    edu2: "組織行為與決策分析跨領域學士",
+    edu3: "GPA 3.91 / 4.30",
+    eduNote: "自行設計的跨領域學位，結合組織行為、資訊系統與量化分析。",
+    issmAward: "黃紀獎學金 · 優秀期末發表",
+    colP: "使用者的問題",
+    colH: "WorkforceIQ 如何協助",
+    screensSubW: "透過原型的截圖，了解 WorkforceIQ 如何支援員工、用人主管與人資部門。（所有資料皆為虛構）",
+    recMineH: "我的貢獻",
+    wfH: "招募流程如何運作",
+    wfSub: "三個階段，從初步篩選到招募分析。",
+    wfPain: "痛點",
+    wfHelp: "系統如何協助",
+    wf1t: "初步篩選",
+    wf1p: "人工履歷篩選相當耗時，尤其當招募人員需要判讀不熟悉的技術要求時。",
+    wf1h: "招募人員設定篩選條件，AI 協助解讀履歷，系統依規則計算分數。用人主管查看結果，並可在拒絕候選人前重新考慮。",
+    wf2t: "面試排程",
+    wf2p: "協調面試時間需要反覆往返信件。",
+    wf2h: "候選人選擇可預約時段，系統確認時段可用後完成預約。",
+    wf3t: "招募分析",
+    wf3p: "追蹤候選人在各招募階段的進度可能相當繁瑣。",
+    wf3h: "儀表板呈現各階段招募進度，並由 AI 輔助整理招募趨勢。",
+    r8t: "Ariel 看到預約確認",
+    r8b: "畫面顯示選定時段、會議資訊及確認信預覽。",
+    swD: "只更換應徵者的姓名（例如 Amy 或 Andrew），其他履歷內容完全相同。請 ChatGPT 改寫每個版本，再檢視用字是否不同。",
+    dbBody2: "我協助制定商業規則，並撰寫三種難度的 SQL 查詢，其中包括分析訂單數與評分低於平均的餐廳。",
+    dbTech: "SQL · MySQL · ER 建模 · 資料庫正規化",
+    clBody2: "其中一項發現是，會員取得白金資格後，相較前一年，來館頻率下降 20%，平均每次消費金額減少 15%。我擔任組長，參與資料清理，並提出分群行銷建議及製作最終簡報。",
+    clTech: "RFM 分析 · 客戶分群 · 留存策略",
+    tryIt: "線上 Demo：自己試試看", demo: "線上 Demo", code: "程式碼", booking: "面試預約 Demo", cc: "招募指揮中心 Demo",
+    workHead: "精選作品", expHead: "經歷", aboutHead: "背景", contactHead: "聯絡",
+    wiqWhen: "2026 · 獨立專案 · 虛構資料", wiqBody: "支援職涯流動、內部人員配置與人力規劃的決策輔助系統。它把缺少的資料標示為缺少，而不是技能落差；讓員工自己決定誰能看到他的職涯意向；所有人員決策都留給人來做。",
+    recName: "AI 招募自動化系統", recWhen: "2026 年 2–6 月 · 四人課程專案 · 虛構資料",
+    recBody: "把 AI 履歷篩選、主管審核、郵件分流、面試預約與招募分析整合在同一個流程。評分規則由我設計：每位候選人從 70 分起算，由 Gemini 列出套用了哪些可編輯的規則，分數由程式計算。未通過初篩的候選人在婉拒信寄出前，仍可由主管重新審查。我擔任組長，設計指揮中心網頁應用，並整合所有組員的程式碼。",
+    issmName: "AI 協助履歷改寫中的性別偏誤",
+    issmWhen: "中央研究院社會科學計量方法研習營（ISSM）",
+    issmBody: "帶有性別訊號的姓名，是否會影響 ChatGPT 改寫履歷的方式，以及招募人員對改寫結果的評價？在中央研究院 2026 年 ISSM，我提出了一個三階段的研究提案來探討這個問題。",
+    fl1: "姓名的性別訊號", fl2: "ChatGPT 改寫的差異", fl3: "招聘評價的差異", issmMore: "研究設計與現況",
+    pp1h: "研究一：挑選帶有性別訊號的姓名", pp1a: "從 60 個台灣常見姓名出發，以人類與 GPT 的評分評估其被感知的性別。", pp1b: "預期成果：選出 26 個姓名，在被感知性別上保持平衡，同時盡量縮小被感知年齡與社經背景的差異。",
+    pp2h: "研究二：分析 AI 生成的改寫", pp2a: "將 21 份基礎履歷與 26 個姓名配對，每種組合生成兩份改寫。", pp2b: "預期成果：分析 1,092 份改寫在用字上的差異，包括能動性（agency）與共同體性（communion）。",
+    pp3h: "研究三：評估招聘判斷", pp3a: "邀請約 40 位 HR 專業人員比較匿名的改寫履歷配對。", pp3b: "預期成果：檢視 AI 生成用字上的差異，是否會影響面試推薦。",
+    ppH: "假說一：姓名的性別訊號會改變 ChatGPT 改寫履歷的方式。假說二：這些改寫會改變人資對履歷的評價。",
+    is1: "規劃的分析方式：以負二項混合效應模型分析改寫的用字模式，並以次序或 Logistic 混合效應模型分析招聘評價。",
+    is2: "這個專案是已完成的研究提案，並非實證研究。尚未進行資料蒐集與假說檢定。規劃中的限制包括僅使用單一 AI 模型、經挑選的性別訊號姓名，以及合成履歷。",
+    is3: "第三階段（規劃）：預計約 40 位 HR 專業人員閱讀匿名履歷配對，評估面試推薦；規劃使用累積連結與 Logistic 混合效應模型。",
+    is4: "目前狀態：研究提案與分析計畫已完成，尚未正式蒐集資料或進行假說檢定。規劃限制包括單一 AI 模型、刻意挑選性別印象鮮明的姓名，以及合成履歷。",
+    clName: "會員分群與留存分析", clWhen: "政大商業分析社\n五人團隊（組長）",
+    clBody: "我們的五人團隊分析了一間室內運動娛樂場館連鎖企業於 2015 至 2023 年間的約 200 萬筆交易，涵蓋逾 12 萬名會員。透過 RFM 與消費行為分析，我們辨識不同會員客群，並提出針對性的留存策略。",
+    dbName: "外送關聯式資料庫", dbWhen: "五人課程專案",
+    dbBody: "我們的團隊為一個虛構的外送服務設計了 13 張表的 MySQL 資料庫，為餐廳、訂單與相關紀錄建立模型，同時盡量減少資料重複與不一致。資料庫正規化至第三正規化（3NF），以實體關係圖（ER diagram）記錄結構，並用產生的資料與九個 SQL 查詢進行測試。",
+    deltaWhen: "人才招募實習生\n2025 年 7–12 月",
+    deltaBody: "使用公司內部 HR 資訊系統，每週支援超過 40 位候選人的招募流程，包括候選人追蹤與面試協調。協助規劃 2026 校園招募活動。這段經歷也讓我對自動化重複性的招募工作，以及連結員工發展與人力規劃產生興趣。",
+    rfWhen: "IT 招募實習生\n2024 年 6 月–2025 年 1 月",
+    rfBody: "為半導體與科技職缺尋找人才，並將技術性的職缺要求轉化為實用的搜尋與篩選標準。單季創造逾新台幣 10 萬元的營收，並在台北辦公室的季度頒獎中獲得表揚。",
+    clubName: "政大商業分析社", clubWhen: "副社長 · 2024–2025\n人資長 · 2023–2024",
+    clubBody: "負責社員招募、人資營運與對外關係。籌辦兩場職涯交流活動，合計邀請超過 16 位講者、吸引超過 70 位參與者。",
+    whereName: "WorkforceIQ 的起點",
+    whereBody: "在大型電子公司實習時，我注意到一個落差：員工即使透過課程學到新技能，這些成長也未必轉化成看得見的內部職涯機會。WorkforceIQ 因此嘗試串連技能紀錄、內部職缺與培訓課程，同時讓員工自行決定是否公開職涯意向。",
+    eduName: "學歷", eduWhen: "2021 年 9 月–2026 年 6 月",
+    eduBody: "國立臺灣大學，組織行為與決策分析跨領域學士，為自行規劃的學程，結合組織行為、資訊系統與統計。GPA 3.91 / 4.30。",
+    eduCourses: "相關課程：商業程式設計 · 資料庫管理系統 · 現代資料科學視覺化 · 社會統計",
+    contactName: "歡迎聯絡", contactBody: "歡迎交流資訊系統、以人為本的技術、學習，以及組織如何負責任地使用資料。",
+    footer: "© 2026 Te-Chi (Harper) Chen",
+    close: "關閉", walkHead: "看它怎麼運作", walkIntro: "展開後往下捲動即可。所有資料皆為虛構。",
+    walk: "看操作畫面", aboutCo: "公司介紹", source: "資料來源", stepWord: "步驟", ofWord: "/", fiction: "虛構的 Demo 資料",
+    w1t: "River 檢視已記錄的技能", w1b: "River Hsu 是一位業務分析師，有 12 項已記錄的技能。檔案顯示各項技能的等級與最後更新日期，並提供搜尋與篩選。",
+    w4t: "River 查看相關培訓", w4b: "學習目錄收錄 67 門內部課程，顯示每門課培養的技能、目標等級、時數與先修條件。",
+    w5t: "River 控制誰能看到職涯興趣", w5b: "職涯興趣預設不公開。River 可以決定是否讓某個職位的用人主管看到他的興趣。",
+    story: "在台達電子的人資實習期間，我開始思考：員工透過培訓累積的技能，如何在探索公司內部職涯機會時發揮更大的作用？這個問題後來成為 WorkforceIQ 的發想起點之一。",
+    probH: "問題", prob: "訓練的成果看不見：員工不知道哪些職務適合自己，主管不知道誰接近能勝任，HR 也不知道訓練哪裡不夠。",
+    supH: "它支援什麼", sup: "員工自己決定誰能看到意向；主管看到附判斷依據的準備度標籤；HR 看到訓練補不上的缺口。所有決定都由人來做。",
+    builtH: "我做了什麼", built: "SQLite 資料模型、Skill Match 規則與三個 Streamlit 工作區。",
+    roleEmp: "員工", roleMgr: "用人主管", roleHr: "HR",
+    fa1: "國立臺灣大學\n組織行為與決策分析跨領域學士\nGPA 3.91 / 4.30", fa2: "黃紀獎學金，ISSM 2026", fa3: "RecruitFirst 台北辦公室唯一單季營收超過新台幣 10 萬元的實習生",
+    hoodHead: "設計取捨", hoodLead: "WorkforceIQ 為什麼是現在這個樣子。",
+    k1: "隱私", k2: "可解釋性", k3: "資料完整性",
+    d1t: "員工自行決定誰能查看自己的職涯興趣", d1b: "探索其他職位可能涉及敏感的個人意願，因此職涯興趣預設不公開。員工可以針對不同職位，自行決定是否讓負責該職缺的用人主管查看。",
+    d2t: "看得懂的規則，而不是黑箱", d2b: "技能匹配分數與職位準備度標籤，依據公開可見的技能要求與明確規則產生。員工與用人主管可以理解結果如何計算，而不是只能接受無法解釋的推薦。",
+    d3t: "不將缺少技能紀錄視為缺乏能力", d3b: "當員工的某項技能沒有能力等級紀錄時，系統不會將其計入已確認的技能匹配，並標示為「Not recorded（未記錄）」，而不是直接認定員工不具備該技能。",
+    headT: "我想前往的方向", headB: "我希望開發能幫助個人與組織更有效率地工作、做出更好決策的技術。過去的專案讓我了解到，如何將組織中的實際問題轉化為可運作的軟體，也讓我開始思考系統的易用性、可靠性，以及這些系統所支援的決策。\n\n在研究所階段，我希望深化技術能力，並學習如何設計與開發更大規模的系統。長期而言，我希望在軟體開發、資訊系統與以人為本的技術領域交會處發展，打造能解決真實組織需求的工具。",
+    hoodEr: "ER 圖", hoodTests: "測試", hoodCi: "CI 執行紀錄",
+    walkSum: "逐步操作畫面（{n} 步）",
+    wiqLead: "用同一個情境，依序從三種角色來看：員工、有職缺的主管，以及 HR。",
+    recLead: "一位應徵者從履歷到面試的完整路徑，以及之後 HR 看到什麼。",
+    deltaCo: "總部位於台灣的電源管理與散熱解決方案全球領導廠商，全球員工逾 8 萬人。",
+    rfCo: "隸屬 HRnetGroup 的人力仲介公司，業務遍及亞太地區。",
+    w2t: "River 探索內部職涯選項", w2b: "職涯探索頁會比對 River 已記錄的技能與職位要求，計算 Skill Match 分數。River 可以探索各職位，並查看分數是如何算出的。",
+    w3t: "區分技能落差與缺少紀錄", w3b: "在 Systems Analyst 職位中，WorkforceIQ 會把已記錄的技能落差與缺少紀錄的情況分開。缺少紀錄可能拉低匹配分數，但不代表缺乏能力。有相關培訓時，系統也會一併建議。",
+    w6t: "Riley 檢視分配到的職缺", w6b: "Riley Chang 負責一個 Systems Analyst 職缺。儀表板顯示分配給他的職缺與狀態，人員配置的決定仍由人來做。",
+    w7t: "Riley 評估內部人員配置選項", w7b: "River 出現在名單中，是因為他選擇公開對這個職位的興趣。WorkforceIQ 顯示 Skill Match 分數，並建議 Internal Mobility 與 Train First 標籤，決定權仍在 Riley。",
+    w8t: "HR 探索未來的人力需求", w8b: "HR 比較現有與規劃的人數以找出人力缺口，並調整目標來探索不同情境。",
+    w9t: "HR 找出職位能力缺口", w9b: "WorkforceIQ 會標出各職位所需、但現有內部學習課程無法培養到要求熟練程度的技能。",
+    r1t: "招募人員設定篩選規則", r1b: "招募人員載入職缺說明並設定條件。Gemini 判斷適用規則，實際分數由程式從 70 分基準計算。",
+    r2t: "用人主管審查候選人", r2b: "主管查看分數與理由、決定面試人選，也能在婉拒信寄出前重新考慮低分候選人。",
+    r3t: "電子郵件通知進入佇列", r3b: "面試邀請與婉拒信分別列入佇列，招募人員可以查看預計寄出的通知。",
+    r4t: "準備面試邀請", r4b: "通過審查的 Ariel 會出現在包含預約連結的個人化邀請信預覽中。",
+    r5t: "Ariel 選擇面試時段", r5b: "開啟預約連結後，姓名與 Email 自動帶入。Ariel 選擇時段，系統再次確認面試官的可用時間。",
+    r6t: "招募人員檢視招募漏斗", r6b: "儀表板追蹤應徵、面試與錄取人數，呈現轉換情形與候選人在哪些階段流失。",
+    r7t: "AI 說明招募趨勢", r7b: "所有指標由程式計算，AI 只協助摘要，不接觸候選人的姓名、Email 或履歷。",
+    n: {
+      me: ["Harper", "我在臺灣大學主修組織行為與決策分析，並學習程式設計、資料庫與統計。我的專案探索如何把組織問題轉化為實用、以人為本的軟體。"],
+      p_wiq: ["WorkforceIQ", "獨立開發的人力規劃與內部人才流動原型，連結技能紀錄、內部職位、培訓與人力需求。員工可探索職涯，主管可查看有意願的內部人才，HR 可分析未來缺口。使用模擬資料與 AI 輔助程式開發。"],
+      p_rec: ["招募自動化", "四人課堂原型，將重複性招募流程自動化。招募人員設定條件、Gemini 協助解讀履歷，實際分數由程式依規則計算；主管保留審查權，候選人可自行預約面試。我擔任組長。"],
+      p_db: ["外送資料庫", "五人課堂專案，替虛構外送平台設計符合第三正規化（3NF）的 13 表 MySQL 資料庫。我參與訂定商業規則，並撰寫三種難度的 SQL 查詢。"],
+      r_issm: ["ISSM 研究", "在中央研究院 ISSM 提出的三階段研究提案，探討姓名的性別訊號是否影響 ChatGPT 改寫履歷，以及後續招募評價。期末發表獲黃紀獎學金肯定；尚無實證研究結果。"],
+      e_delta: ["台達電子", "擔任人才招募實習生，每週協助處理超過 40 位候選人的招募流程，並參與規劃 2026 年校園招募活動。這段經歷啟發我思考招募自動化，以及培訓與內部職涯機會如何連結。"],
+      e_rf: ["RecruitFirst", "擔任 IT 招募實習生，為半導體與科技職缺搜尋人才，將技術要求轉化為搜尋及初篩條件，單季創造超過新台幣 10 萬元營收。"],
+      e_club: ["政大商分社", "先後擔任人資長與副社長，負責社員招募並籌辦兩場職涯交流活動，也帶領五人團隊完成會員分群與留存分析專案。"],
+    }
+  }
+};
+
+/* ---------- state ---------- */
+let lang = "en";
+try { const s = localStorage.getItem("hc-lang"); if (s === "zh" || s === "en") lang = s; } catch (e) {}
+const T = () => I18N[lang];
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function safe(href) { return typeof href === "string" && /^(https?:\/\/|#)/.test(href); }
+function el(tag, attrs, text) {
+  const e = document.createElement(tag);
+  if (attrs) for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (text != null) e.textContent = text;
+  return e;
+}
+function linkEl(label, href) {
+  if (href.charAt(0) === "#") {
+    const a = el("a", { href: href }, label);
+    a.addEventListener("click", ev => {
+      const t = document.querySelector(href);
+      if (!t) return;
+      ev.preventDefault();
+      if (t.tagName === "DETAILS") t.open = true;
+      const wd = t.querySelector ? t.querySelector("details.walk") : null;
+      if (wd) wd.open = true;
+      t.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: wd ? "start" : "center" });
+    });
+    return a;
+  }
+  return el("a", { href: href, target: "_blank", rel: "noopener noreferrer" }, label);
+}
+
+/* ---------- graph data ---------- */
+const NODES = [
+  { id: "me", type: "me", r: 30, hx: 0, hy: 0 },
+  { id: "p_wiq", type: "work", r: 24, hx: 0.46, hy: -0.45, links: ["wiqDemo:demo", "wiqCode:code"] },
+  { id: "p_rec", type: "work", r: 24, hx: 0.45, hy: 0.5, links: ["recDemo:cc", "recBooking:booking", "recCode:code"] },
+  { id: "p_db", type: "work", r: 17, hx: 0.92, hy: -0.02 },
+  { id: "r_issm", type: "research", r: 20, hx: 0.0, hy: -0.8 },
+  { id: "e_delta", type: "exp", r: 18, hx: -0.6, hy: -0.45, links: ["coDelta:aboutCo"] },
+  { id: "e_rf", type: "exp", r: 16, hx: -0.55, hy: 0.5, links: ["coRf:aboutCo"] },
+  { id: "e_club", type: "exp", r: 15, hx: -0.95, hy: 0.02 }
+];
+const EDGES = [
+  ["me", "p_wiq"], ["me", "p_rec"], ["me", "p_db"], ["me", "r_issm"],
+  ["me", "e_delta"], ["me", "e_rf"], ["me", "e_club"],
+  ["e_delta", "p_wiq"], ["e_rf", "p_rec"], ["e_delta", "r_issm"],
+  ["p_wiq", "p_rec"], ["p_wiq", "p_db"]
+];
+// Each explanation is tied to an actual edge in EDGES, not an inferred relationship.
+// The same concise explanation is shown from either endpoint.
+const CONNECTION_REASONS = {
+  en: {
+    "me|p_wiq": "An independent project applying my programming and organizational knowledge to workforce planning.",
+    "me|p_rec": "A team project combining my recruitment experience with software automation.",
+    "me|p_db": "Coursework that strengthened my relational data modeling and SQL skills.",
+    "me|r_issm": "A research proposal connecting AI-assisted recruitment with questions about fairness.",
+    "e_delta|me": "My HR internship helped shape the problems I chose to explore through technology.",
+    "e_rf|me": "Technology recruitment introduced me to specialized job requirements and screening decisions.",
+    "e_club|me": "Club leadership and a member analytics project strengthened my teamwork and analytical experience.",
+    "e_delta|p_wiq": "The internship prompted questions about linking employee development with internal opportunities.",
+    "e_rf|p_rec": "Recruitment experience informed how I structured screening criteria and workflows.",
+    "e_delta|r_issm": "Recruitment experience informed my interest in how AI-generated résumé wording might affect evaluation.",
+    "p_rec|p_wiq": "Both prototypes use explicit rules to support people-related decisions while keeping human judgment involved.",
+    "p_db|p_wiq": "Relational database modeling informed the structure of WorkforceIQ's interconnected records."
+  },
+  zh: {
+    "me|p_wiq": "將組織知識與程式能力應用在人力規劃的獨立專案。",
+    "me|p_rec": "結合招募實務經驗與軟體自動化的團隊專案。",
+    "me|p_db": "透過課堂專案累積關聯式資料建模與 SQL 能力。",
+    "me|r_issm": "研究 AI 輔助招募與公平性問題的研究提案。",
+    "e_delta|me": "人資實習經驗啟發了我後續想以科技探索的問題。",
+    "e_rf|me": "科技人才招募讓我接觸專業職缺要求與履歷篩選決策。",
+    "e_club|me": "社團領導與會員分析專案累積了團隊合作與分析經驗。",
+    "e_delta|p_wiq": "實習經驗促使我思考如何連結員工發展與內部職涯機會。",
+    "e_rf|p_rec": "招募經驗協助我設計履歷篩選條件與流程。",
+    "e_delta|r_issm": "招募經驗引發我對 AI 履歷改寫如何影響評估的研究興趣。",
+    "p_rec|p_wiq": "兩套原型都以明確規則輔助人才相關決策，並保留人工判斷。",
+    "p_db|p_wiq": "關聯式資料庫建模經驗應用於 WorkforceIQ 的資料結構設計。"
+  }
+};
+function edgeKey(a, b) { return [a, b].sort().join("|"); }
+
+const byId = {};
+NODES.forEach(n => { byId[n.id] = n; n.nbrs = new Set(); });
+EDGES.forEach(e => { byId[e[0]].nbrs.add(e[1]); byId[e[1]].nbrs.add(e[0]); });
+
+/* ---------- graph rendering and physics ---------- */
+const svg = document.getElementById("graph");
+const NS = "http://www.w3.org/2000/svg";
+let W = 0, H = 0, S = 1, alpha = 1, raf = 0, selected = null, hovered = null, drag = null;
+const linkEls = [], nodeEls = {};
+
+function build() {
+  svg.textContent = "";
+  const gl = document.createElementNS(NS, "g");
+  const gn = document.createElementNS(NS, "g");
+  svg.append(gl, gn);
+  EDGES.forEach((e, i) => {
+    const l = document.createElementNS(NS, "line");
+    l.setAttribute("class", "link");
+    gl.append(l);
+    linkEls[i] = l;
+  });
+  NODES.forEach(n => {
+    const g = document.createElementNS(NS, "g");
+    g.setAttribute("class", "node " + n.type);
+    g.setAttribute("tabindex", "0");
+    g.setAttribute("role", "button");
+    g.dataset.id = n.id;
+    const c = document.createElementNS(NS, "circle");
+    c.setAttribute("r", n.r);
+    const t = document.createElementNS(NS, "text");
+    t.setAttribute("text-anchor", "middle");
+    g.append(c, t);
+    gn.append(g);
+    nodeEls[n.id] = { g: g, t: t, c: c };
+    attach(g, n);
+  });
+  labels();
+}
+
+function labels() {
+  NODES.forEach(n => {
+    const ne = nodeEls[n.id];
+    const lab = T().n[n.id][0];
+    ne.t.textContent = lab;
+    ne.t.setAttribute("y", n.r + 19);
+    ne.g.setAttribute("aria-label", lab + ". " + T().n[n.id][1]);
+  });
+}
+
+function size() {
+  const r = svg.getBoundingClientRect();
+  W = Math.max(300, r.width); H = Math.max(300, r.height);
+  svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+  svg.classList.toggle("compact", W < 560);
+  const padX = W < 560 ? 40 : 100;
+  const rx = W / 2 - padX, ry = H / 2 - 48;
+  NODES.forEach(n => {
+    const nx = W / 2 + n.hx * rx, ny = H / 2 + n.hy * ry;
+    n.px = nx; n.py = ny;
+    if (n.x == null) { n.x = nx; n.y = ny; n.vx = 0; n.vy = 0; }
+  });
+  EDGES.forEach(e => {
+    const a = byId[e[0]], b = byId[e[1]];
+    e.rest = Math.hypot(a.px - b.px, a.py - b.py);
+  });
+}
+
+function tick() {
+  const k = alpha;
+  for (let i = 0; i < NODES.length; i++) {
+    for (let j = i + 1; j < NODES.length; j++) {
+      const a = NODES[i], b = NODES[j];
+      let dx = b.x - a.x, dy = b.y - a.y;
+      let d2 = dx * dx + dy * dy;
+      if (d2 < 1) { dx = Math.random() - 0.5; dy = Math.random() - 0.5; d2 = 1; }
+      const d = Math.sqrt(d2);
+      const minD = a.r + b.r + 34;
+      if (d < minD) {
+        const f = (minD - d) * 0.06 * k;
+        const fx = (dx / d) * f, fy = (dy / d) * f;
+        a.vx -= fx; a.vy -= fy; b.vx += fx; b.vy += fy;
+      }
+    }
+  }
+  EDGES.forEach(e => {
+    const a = byId[e[0]], b = byId[e[1]];
+    const dx = b.x - a.x, dy = b.y - a.y;
+    const d = Math.hypot(dx, dy) || 1;
+    const f = (d - e.rest) * 0.05 * k;
+    const fx = (dx / d) * f, fy = (dy / d) * f;
+    a.vx += fx; a.vy += fy; b.vx -= fx; b.vy -= fy;
+  });
+  NODES.forEach(n => {
+    if (n.fixed) { n.x = n.fx; n.y = n.fy; n.vx = 0; n.vy = 0; return; }
+    n.vx += (n.px - n.x) * 0.03 * k;
+    n.vy += (n.py - n.y) * 0.03 * k;
+    n.vx *= 0.8; n.vy *= 0.8;
+    n.x += n.vx; n.y += n.vy;
+    const mx = n.r + (W < 560 ? 58 : 34), top = n.r + 10, bot = n.r + 30;
+    n.x = Math.max(mx, Math.min(W - mx, n.x));
+    n.y = Math.max(top, Math.min(H - bot, n.y));
+  });
+  alpha = Math.max(0, alpha * 0.985 - 0.0003);
+}
+
+function paint() {
+  NODES.forEach(n => nodeEls[n.id].g.setAttribute("transform", "translate(" + n.x.toFixed(1) + " " + n.y.toFixed(1) + ")"));
+  EDGES.forEach((e, i) => {
+    const a = byId[e[0]], b = byId[e[1]], l = linkEls[i];
+    l.setAttribute("x1", a.x.toFixed(1)); l.setAttribute("y1", a.y.toFixed(1));
+    l.setAttribute("x2", b.x.toFixed(1)); l.setAttribute("y2", b.y.toFixed(1));
+  });
+}
+
+function loop() {
+  raf = 0;
+  tick(); paint();
+  if (alpha > 0.002 || drag) raf = requestAnimationFrame(loop);
+}
+function heat(a) {
+  alpha = Math.max(alpha, a);
+  if (reduceMotion) { for (let i = 0; i < 160; i++) tick(); paint(); return; }
+  if (!raf) raf = requestAnimationFrame(loop);
+}
+
+/* ---------- interaction ---------- */
+function focusNode(id) {
+  hovered = id;
+  // Hover temporarily previews a neighborhood; selecting a node keeps its
+  // connections visible after the pointer leaves the graph.
+  const active = id || selected;
+  const adjacent = new Set(active ? [active, ...byId[active].nbrs] : []);
+  NODES.forEach(n => {
+    const on = !active || adjacent.has(n.id);
+    nodeEls[n.id].g.classList.toggle("dim", !on);
+    nodeEls[n.id].g.classList.toggle("related", !!active && n.id !== active && adjacent.has(n.id));
+  });
+  EDGES.forEach((e, i) => {
+    const on = !active || e[0] === active || e[1] === active;
+    linkEls[i].classList.toggle("dim", !on);
+    linkEls[i].classList.toggle("hot", !!active && on);
+  });
+}
+function select(id) {
+  selected = selected === id ? null : id;
+  NODES.forEach(n => nodeEls[n.id].g.classList.toggle("sel", n.id === selected));
+  renderPanel();
+  focusNode(null);
+}
+
+function renderPanel() {
+  const title = document.getElementById("pTitle"), body = document.getElementById("pBody"), links = document.getElementById("pLinks");
+  const connections = document.getElementById("pConnections");
+  links.textContent = "";
+  connections.textContent = "";
+  connections.hidden = true;
+  const key = selected;
+  if (!key) { title.textContent = T().pDefaultT; body.textContent = T().pDefaultB; return; }
+  const n = byId[key] || {}, txt = T().n[key];
+  title.textContent = txt[0]; body.textContent = txt[1];
+  (n.links || []).forEach(s => {
+    const parts = s.split(":"), href = LINKS[parts[0]];
+    if (safe(href)) links.append(linkEl(T()[parts[1]], href));
+  });
+  const neighboringEdges = EDGES.filter(e => e[0] === key || e[1] === key);
+  if (neighboringEdges.length) {
+    const heading = el("h4", {}, lang === "zh" ? "關聯原因" : "Connections");
+    const list = el("ul");
+    neighboringEdges.forEach(e => {
+      const otherId = e[0] === key ? e[1] : e[0];
+      const explanation = CONNECTION_REASONS[lang][edgeKey(e[0], e[1])];
+      if (!explanation) return;
+      const item = el("li");
+      item.append(el("strong", {}, T().n[otherId][0]), el("span", {}, explanation));
+      list.append(item);
+    });
+    if (list.children.length) {
+      connections.append(heading, list);
+      connections.hidden = false;
+    }
+  }
+}
+
+function pt(ev) {
+  const r = svg.getBoundingClientRect();
+  return { x: (ev.clientX - r.left) * (W / r.width), y: (ev.clientY - r.top) * (H / r.height) };
+}
+
+function attach(g, n) {
+  g.addEventListener("pointerenter", () => { if (!drag) focusNode(n.id); });
+  g.addEventListener("pointerleave", () => { if (!drag) focusNode(null); });
+  g.addEventListener("focus", () => focusNode(n.id));
+  g.addEventListener("blur", () => focusNode(null));
+  g.addEventListener("keydown", ev => {
+    if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); select(n.id); }
+  });
+  g.addEventListener("pointerdown", ev => {
+    ev.preventDefault();
+    g.setPointerCapture(ev.pointerId);
+    const p = pt(ev);
+    drag = { id: n.id, sx: p.x, sy: p.y, moved: false, ox: n.x - p.x, oy: n.y - p.y };
+    n.fixed = true; n.fx = n.x; n.fy = n.y;
+    focusNode(n.id);
+    heat(0.3);
+  });
+  g.addEventListener("pointermove", ev => {
+    if (!drag || drag.id !== n.id) return;
+    const p = pt(ev);
+    if (Math.abs(p.x - drag.sx) + Math.abs(p.y - drag.sy) > 4) drag.moved = true;
+    n.fx = Math.max(n.r + 4, Math.min(W - n.r - 4, p.x + drag.ox));
+    n.fy = Math.max(n.r + 4, Math.min(H - n.r - 4, p.y + drag.oy));
+    heat(0.3);
+  });
+  const end = ev => {
+    if (!drag || drag.id !== n.id) return;
+    const wasClick = !drag.moved;
+    n.fixed = false; drag = null;
+    if (wasClick) select(n.id);
+    heat(0.25);
+  };
+  g.addEventListener("pointerup", end);
+  g.addEventListener("pointercancel", end);
+}
+
+/* ---------- walkthroughs ---------- */
+const CASES = [
+  { slot: "wiq-emp", id: "wiq-emp", url: "workforceiq-demo.streamlit.app", k: "w", o: 0, img: "wiq", n: 5, sumKey: "walkEmp", title: "wiqTitle", lead: "wiqLead", demo: "wiqDemo" },
+  { slot: "wiq-mgr", id: "wiq-mgr", url: "workforceiq-demo.streamlit.app", k: "w", o: 5, img: "wiq", n: 2, sumKey: "walkMgr", title: "wiqTitle", lead: "wiqLead", demo: "wiqDemo" },
+  { slot: "wiq-hr", id: "wiq-hr", url: "workforceiq-demo.streamlit.app", k: "w", o: 7, img: "wiq", n: 2, sumKey: "walkHr", title: "wiqTitle", lead: "wiqLead", demo: "wiqDemo" },
+  { slot: "rec-hr", id: "rec-hr", url: "harper-hr-dashboard.streamlit.app", k: "r", idx: [1, 2, 3, 4, 6, 7], img: "rec", n: 6, sumKey: "walkRec", title: "recName", lead: "recLead", demo: "recDemo" },
+  { slot: "rec-cand", id: "rec-cand", url: "harper-interview-booking.streamlit.app", k: "r", idx: [5, 8], img: "rec", n: 2, sumKey: "walkCand", title: "recName", lead: "recLead", demo: "recDemo" }
+];
+
+function buildCases() {
+  CASES.forEach(c => {
+    const host = document.getElementById("slot-" + c.slot);
+    const wrap = el("div", { "class": "casewrap", id: c.id });
+    const head = el("div", { "class": "casehead" });
+    const h = el("h3"); h.dataset.k = c.title;
+    const lead = el("p"); lead.dataset.k = c.lead; lead.hidden = true;
+    head.append(h, lead); head.hidden = true;
+
+    const layout = el("div", { "class": "case" });
+    const stage = el("div", { "class": "stage" });
+    const frame = el("div", { "class": "frame" });
+    const bar = el("div", { "class": "frame-bar" });
+    const urlSpan = el("span", null, c.url);
+    const fic = el("span"); fic.dataset.k = "fiction";
+    bar.append(urlSpan, fic);
+    const shots = el("div", { "class": "shots" }); c.box = shots;
+    const dots = el("div", { "class": "dots" });
+    const steps = el("div", { "class": "steps" });
+    c.imgs = []; c.stepEls = []; c.dotEls = [];
+
+    for (let i = 1; i <= c.n; i++) {
+      const gi = c.idx ? c.idx[i - 1] : i + (c.o || 0);
+      const src = "img/" + c.img + "-" + gi + ".webp";
+      const im = el("img", { src: src, alt: "", width: "1500", height: "790" });
+      if (i > 1) im.setAttribute("loading", "lazy");
+      if (i === 1) im.classList.add("on");
+      shots.append(im); c.imgs.push(im);
+
+      const d = el("button", { type: "button" });
+      d.addEventListener("click", () => c.stepEls[i - 1].scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" }));
+      dots.append(d); c.dotEls.push(d);
+
+      const st = el("div", { "class": "step" });
+      const cnt = el("p", { "class": "count" });
+      const t = el("h3"); t.dataset.k = c.k + gi + "t";
+      const b = el("p"); b.dataset.k = c.k + gi + "b";
+      const inl = el("img", { "class": "inline", src: src, alt: "", loading: "lazy", width: "1500", height: "790" });
+      st.append(cnt, t, b, inl);
+      steps.append(st); c.stepEls.push(st);
+    }
+    c.dotEls[0].classList.add("on"); c.stepEls[0].classList.add("on");
+    frame.append(bar, shots);
+    stage.append(frame, dots);
+    layout.append(stage, steps);
+    const det = el("details", { "class": "walk" });
+    const sum = el("summary");
+    c.sumEl = sum;
+    const tryp = el("p", { "class": "tryit" });
+    const tryA = el("a", { href: LINKS[c.slot === "rec-cand" ? "recBooking" : c.demo], target: "_blank", rel: "noopener" }); tryA.dataset.k = "tryIt";
+    tryp.append(tryA);
+    det.append(sum, layout, tryp);
+    c.det = det;
+    wrap.append(head, det);
+    host.append(wrap);
+
+    const fit = () => {
+      const im = c.imgs.find(x => x.classList.contains("on"));
+      if (im && im.naturalWidth) c.box.style.aspectRatio = im.naturalWidth + " / " + im.naturalHeight;
+    };
+    c.imgs.forEach(im => im.addEventListener("load", fit));
+    const show = i => {
+      c.imgs.forEach((im, j) => im.classList.toggle("on", j === i));
+      fit();
+      c.dotEls.forEach((d, j) => d.classList.toggle("on", j === i));
+      c.stepEls.forEach((e, j) => e.classList.toggle("on", j === i));
+    };
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      if (!c.det.open) return;
+      const mid = window.innerHeight / 2;
+      let best = 0, bd = Infinity;
+      c.stepEls.forEach((e, i) => {
+        const r = e.getBoundingClientRect();
+        const d = Math.abs((r.top + r.bottom) / 2 - mid);
+        if (d < bd) { bd = d; best = i; }
+      });
+      show(best);
+    };
+    const queue = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+    window.addEventListener("scroll", queue, { passive: true });
+    window.addEventListener("resize", queue);
+    c.det.addEventListener("toggle", queue);
+  });
+}
+
+const lb = document.getElementById("lb"), lbImg = document.getElementById("lbImg");
+let lbFrom = null;
+function openLb(im) { lbFrom = document.activeElement; lbImg.src = im.currentSrc || im.src; lbImg.alt = im.alt; lb.hidden = false; document.getElementById("lbClose").focus(); }
+function closeLb() { lb.hidden = true; lbImg.removeAttribute("src"); if (lbFrom && lbFrom.focus) lbFrom.focus(); }
+lb.addEventListener("click", closeLb);
+document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !lb.hidden) closeLb(); });
+document.addEventListener("click", ev => {
+  const t = ev.target;
+  const wl = t && t.closest ? t.closest('a[href="#wiq-emp"], a[href="#rec-hr"]') : null;
+  if (wl && !wl.closest("#pLinks, .rlinks")) {
+    ev.preventDefault();
+    const tgt = document.querySelector(wl.getAttribute("href"));
+    const d = tgt && tgt.querySelector("details.walk");
+    if (d) d.open = true;
+    if (tgt) tgt.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+    return;
+  }
+  if (t && t.tagName === "IMG" && (t.closest(".shots") || t.classList.contains("inline"))) openLb(t);
+});
+
+function caseText() {
+  CASES.forEach(c => {
+    c.sumEl.textContent = T()[c.sumKey].replace("{n}", c.n);
+    c.stepEls.forEach((st, j) => {
+      st.querySelector(".count").textContent = T().stepWord + " " + (j + 1) + " " + T().ofWord + " " + c.n;
+      const title = T()[c.k + (c.idx ? c.idx[j] : j + 1 + (c.o || 0)) + "t"];
+      c.imgs[j].alt = title;
+      st.querySelector("img.inline").alt = title;
+      c.dotEls[j].setAttribute("aria-label", T().stepWord + " " + (j + 1) + ": " + title);
+    });
+  });
+}
+
+/* ---------- text, links, theme ---------- */
+function applyText() {
+  document.documentElement.lang = lang === "zh" ? "zh-Hant" : "en";
+  document.querySelectorAll("[data-k]").forEach(e => {
+    const v = T()[e.dataset.k];
+    if (v == null) return;
+    if (e.hasAttribute("data-html")) e.innerHTML = v; else e.textContent = v;
+  });
+  document.getElementById("langBtn").textContent = lang === "zh" ? "English" : "中文";
+  labels();
+  renderPanel();
+  renderLinks();
+  caseText();
+}
+
+function fill(id, items) {
+  const box = document.getElementById(id);
+  box.textContent = "";
+  items.forEach(it => { if (safe(it[1])) box.append(linkEl(it[0], it[1])); });
+}
+function renderLinks() {
+  const t = T();
+  [["tryWiq","wiqDemo"],["tryRec1","recDemo"],["tryRec2","recBooking"]].forEach(([i,k]) => { const a = document.getElementById(i); if (a && safe(LINKS[k])) a.href = LINKS[k]; });
+  fill("wiqLinks", [[t.demo, LINKS.wiqDemo], [t.code, LINKS.wiqCode]]);
+  fill("recLinks", [[t.cc, LINKS.recDemo], [t.booking, LINKS.recBooking], [t.code, LINKS.recCode]]);
+  fill("hoodLinks", [[t.hoodEr, LINKS.wiqEr]]);
+  fill("contactLinks", [["GitHub", LINKS.github], ["LinkedIn", LINKS.linkedin]]);
+}
+
+document.getElementById("emailText").textContent = LINKS.email;
+document.getElementById("copyBtn").addEventListener("click", ev => {
+  const btn = ev.currentTarget;
+  const done = () => { btn.textContent = T().copied; setTimeout(() => { btn.textContent = T().copy; }, 1600); };
+  const fallback = () => {
+    const r = document.createRange(); r.selectNodeContents(document.getElementById("emailText"));
+    const s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+  };
+  try { navigator.clipboard.writeText(LINKS.email).then(done, fallback); } catch (e) { fallback(); }
+});
+
+document.getElementById("langBtn").addEventListener("click", () => {
+  lang = lang === "en" ? "zh" : "en";
+  try { localStorage.setItem("hc-lang", lang); } catch (e) {}
+  applyText();
+});
+document.getElementById("themeBtn").addEventListener("click", () => {
+  const root = document.documentElement;
+  const dark = root.dataset.theme ? root.dataset.theme === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+  root.dataset.theme = dark ? "light" : "dark";
+  try { localStorage.setItem("hc-theme", root.dataset.theme); } catch (e) {}
+});
+try { const th = localStorage.getItem("hc-theme"); if (th === "light" || th === "dark") document.documentElement.dataset.theme = th; } catch (e) {}
+
+/* ---------- start ---------- */
+build();
+size();
+buildCases();
+applyText();
+select(null);
+focusNode(null);
+paint();
+heat(0.3);
+if (window.ResizeObserver) new ResizeObserver(() => {
+  const r = svg.getBoundingClientRect();
+  if (Math.abs(r.width - W) > 1 || Math.abs(r.height - H) > 1) { NODES.forEach(n => { n.x = null; }); size(); paint(); heat(0.2); }
+}).observe(svg);
+
+/* pain -> fix pair animation */
+(function () {
+  const pairs = document.querySelectorAll(".pair");
+  if (!("IntersectionObserver" in window)) return;
+  pairs.forEach(p => p.classList.add("anim"));
+  const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } }), { threshold: 0.6 });
+  pairs.forEach(p => io.observe(p));
+})();
+</script>
+
+</body>
+</html>
