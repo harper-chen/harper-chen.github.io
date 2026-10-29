@@ -180,6 +180,7 @@ p { margin: 0; }
 #more .row:first-child { border-bottom: 1px solid var(--line); padding-bottom: 14px; }
 .screens > h3.kick2 { font-size: 1.0625rem; }
 .ul { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: .22em; text-underline-offset: .18em; text-decoration-skip-ink: none; }
+.portrait { width: 112px; height: 112px; border-radius: 50%; object-fit: cover; border: 3px solid var(--sage-wash); order: -1; justify-self: start; }
 .hero .lead { font-size: clamp(1.1rem, 1.8vw, 1.4rem); line-height: 1.4; margin: 0; font-weight: 500; }
 @media (min-width: 700px) { .hero .lead { max-width: 46em; } }
 .hero .facts li { background: var(--accent-wash); border-radius: 12px; padding: 12px 16px; line-height: 1.5; }
@@ -496,6 +497,13 @@ details.co .src { color: var(--muted); font-size: .875rem; }
   .node, .link, .node circle, .shots img, .step, .dots button { transition: none; }
 }
 #headed p { white-space: pre-line; }
+@media (min-width: 960px) {
+  .hero { grid-template-columns: minmax(0, 1fr) auto; column-gap: 40px; row-gap: 16px; }
+  .hero .htext { display: contents; }
+  .hero .htext > h1, .hero .htext > .lead { grid-column: 1 / -1; }
+  .hero .htext > .sub, .hero .htext > .facts { grid-column: 1; }
+  .portrait { order: 0; width: 168px; height: 168px; grid-column: 2; grid-row: 3 / span 2; align-self: center; justify-self: end; }
+}
 </style>
 
 </head>
@@ -521,6 +529,7 @@ B.A. in Interdisciplinary Studies of Organizational Behavior and Decision Analyt
 GPA 3.91 / 4.30</li>
       </ul>
      </div>
+     <img class="portrait" src="img/photo.webp" width="480" height="480" alt="Portrait of Harper Chen">
     </div>
 
     <section id="contents">
