@@ -754,6 +754,7 @@ GPA 3.91 / 4.30</li>
 /* Everything you may want to change lives in LINKS and I18N. An empty link is hidden. */
 const LINKS = {
   email: "techichen0324@gmail.com",
+  emailZh: "harperchen118@gmail.com", // shown on the Chinese version (matches the résumé on job platforms)
   github: "https://github.com/harper-chen",
   linkedin: "",
   wiqDemo: "https://workforceiq-demo.streamlit.app/",
@@ -1060,7 +1061,7 @@ const I18N = {
     d1t: "員工自行決定誰能查看自己的職涯興趣", d1b: "探索其他職位可能涉及敏感的個人意願，因此職涯興趣預設不公開。員工可以針對不同職位，自行決定是否讓負責該職缺的用人主管查看。",
     d2t: "看得懂的規則，而不是黑箱", d2b: "技能符合度分數與職位準備度標籤，依據公開可見的技能要求與明確規則產生。員工與用人主管可以理解結果如何計算，而不是只能接受無法解釋的推薦。",
     d3t: "不將缺少技能紀錄視為缺乏能力", d3b: "當員工的某項技能沒有能力等級紀錄時，系統會標示為「Not recorded（未記錄）」，也不會把它算成技能落差。不過它在 Skill Match 分數中仍以 0 計算，所以系統會提醒分數可能低估了員工的適配度。",
-    headT: "接下來的方向", headB: "我希望開發能幫助個人與組織更有效率地工作、做出更好決策的技術。過去的專案讓我了解到，如何將組織中的實際問題轉化為可運作的軟體，也讓我開始思考系統的易用性、可靠性，以及這些系統所支援的決策。\n\n在研究所階段，我希望深化技術能力，並學習如何設計與開發更大規模的系統。長期而言，我希望在軟體開發、資訊系統與以人為本的技術領域交會處發展，打造能解決真實組織需求的工具。",
+    headT: "這半年想在業界學到的事", headB: "2027 年 2 月到 7 月，我希望在真實的工作環境中，學會把「能動的原型」變成「能上線、能維護的系統」：團隊怎麼做程式碼審查、測試與部署，以及怎麼在時程、資料品質和使用者需求之間取捨。我也想多接觸實際的使用者，了解企業內部流程的痛點，練習把模糊的需求整理成清楚的技術規格。我對後端開發、企業系統、HR Tech 與 AI 應用特別有興趣。實習結束後我將赴美攻讀碩士，希望把這段實務經驗帶進研究所，持續打造能解決真實組織問題的系統。",
     hoodEr: "ER 圖", hoodTests: "測試", hoodCi: "CI 執行紀錄",
     walkSum: "逐步操作畫面（{n} 步）",
     wiqLead: "用同一個情境，依序從三種角色來看：員工、有職缺的主管，以及 HR。",
@@ -1550,6 +1551,7 @@ function caseText() {
 function applyText() {
   document.documentElement.lang = lang === "zh" ? "zh-Hant" : "en";
   document.title = TITLES[lang];
+  document.getElementById("emailText").textContent = emailFor();
   document.querySelectorAll("[data-k]").forEach(e => {
     const v = T()[e.dataset.k];
     if (v == null) return;
@@ -1580,7 +1582,7 @@ function renderLinks() {
   fill("contactLinks", [["GitHub", LINKS.github], ["LinkedIn", LINKS.linkedin]]);
 }
 
-document.getElementById("emailText").textContent = LINKS.email;
+const emailFor = () => (lang === "zh" && LINKS.emailZh) ? LINKS.emailZh : LINKS.email;
 document.getElementById("copyBtn").addEventListener("click", ev => {
   const btn = ev.currentTarget;
   const done = () => { btn.textContent = T().copied; setTimeout(() => { btn.textContent = T().copy; }, 1600); };
@@ -1588,7 +1590,7 @@ document.getElementById("copyBtn").addEventListener("click", ev => {
     const r = document.createRange(); r.selectNodeContents(document.getElementById("emailText"));
     const s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
   };
-  try { navigator.clipboard.writeText(LINKS.email).then(done, fallback); } catch (e) { fallback(); }
+  try { navigator.clipboard.writeText(emailFor()).then(done, fallback); } catch (e) { fallback(); }
 });
 
 document.getElementById("langBtn").addEventListener("click", () => {
