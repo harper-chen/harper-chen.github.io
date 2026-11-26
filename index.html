@@ -512,7 +512,7 @@ details.co .src { color: var(--muted); font-size: .875rem; }
   <header class="top">
     <a class="mark" href="#top" data-k="brand">Harper Chen</a>
     <div class="controls">
-      <button class="ctl" id="langBtn" type="button" aria-label="Switch language" hidden style="display:none">中文</button>
+      <button class="ctl" id="langBtn" type="button" aria-label="Switch language" lang="zh-Hant">中文</button>
       <button class="ctl" id="themeBtn" type="button" aria-label="Switch theme" data-k="theme">Theme</button>
     </div>
   </header>
@@ -658,7 +658,7 @@ GPA 3.91 / 4.30</li>
           <div></div>
         </div>
         <div class="row">
-          <div><h3>Delta Electronics</h3><p class="when" data-k="deltaWhen">Talent Acquisition Intern, Jul to Dec 2025</p></div>
+          <div><h3 data-k="deltaName">Delta Electronics</h3><p class="when" data-k="deltaWhen">Talent Acquisition Intern, Jul to Dec 2025</p></div>
           <div>
             <p data-k="deltaBody">Ran recruiting workflows in an internal HRIS for 40+ candidates a week. Helped plan and run the 2026 Campus Recruitment Campaign, including booth activities, the campaign theme and giveaways.</p>
             <p class="tech" id="exp-delta" data-k="deltaCo"></p>
@@ -868,7 +868,7 @@ const I18N = {
     clBody: "Our five-person team analyzed approximately two million transactions from over 120,000 members of an indoor sports and entertainment venue chain (2015–2023). Using RFM and purchase behavior analysis, we identified member segments and developed targeted retention strategies.",
     dbName: "Food-Delivery Relational Database", dbWhen: "Five-person course project",
     dbBody: "Our team designed a 13-table MySQL database for a fictional food-delivery service, modeling restaurants, orders, and related records while minimizing data redundancy and inconsistencies. We normalized the database to third normal form (3NF), documented its structure with an entity–relationship diagram, and tested it using generated data and nine SQL queries.",
-    deltaWhen: "Talent Acquisition Intern\nJul–Dec 2025",
+    deltaName: "Delta Electronics", deltaWhen: "Talent Acquisition Intern\nJul–Dec 2025",
     deltaBody: "Supported recruitment for over 40 candidates weekly using an internal HR information system, including candidate tracking and interview coordination. Helped plan the 2026 campus recruitment campaign. The experience also sparked my interest in automating repetitive recruiting tasks and connecting employee development with workforce planning.",
     rfWhen: "IT Recruitment Intern\nJun 2024–Jan 2025",
     rfBody: "Sourced candidates for semiconductor and technology positions, translating technical job requirements into practical search and screening criteria. Generated over NT$100,000 in quarterly revenue and received recognition at the Taipei office's quarterly awards.",
@@ -933,27 +933,27 @@ const I18N = {
     brand: "Harper Chen", theme: "主題", copy: "複製", copied: "已複製", wiqTitle: "WorkforceIQ",
     swCap: "同一份履歷，不同姓名", swOr: "或", swName: "姓名：", swSame: "技能、經歷與原文完全相同。", swAsk: "請它潤飾履歷", swQ: "潤飾結果會因名字而不同嗎？增加、刪除或改寫了什麼？",
     lead: "我是臺灣大學畢業生，關注<span class=\"ul\">人</span>、<span class=\"ul\">科技</span>與<span class=\"ul\">商業</span>如何結合。",
-    eP1: "我適合哪些內部職位？該如何準備？", eF1: "比較已記錄的技能與職位要求，查看匹配程度、技能差距及相關培訓課程。",
+    eP1: "我適合哪些內部職位？該如何準備？", eF1: "比較已記錄的技能與職位要求，查看符合程度、技能差距及相關培訓課程。",
     eP2: "我可以私下探索其他職位嗎？", eF2: "職涯興趣預設不公開，由員工自行決定哪些職位的招募主管可以查看。",
     eP3: "我想了解其他職缺，但還不想讓所有主管知道。", eF3: "職涯意向預設保密；只有我同意，特定職缺的主管才能看到。",
-    mP1: "公司內有哪些員工可能適合我的職缺？", mF1: "查看主動公開轉職意願的員工，以及其技能匹配程度與職位準備度。",
-    mP2: "我應該考慮內部人才，還是對外招募？", mF2: "查看內部轉調、進一步評估或外部招募的建議，最終決策仍由人員負責。",
+    mP1: "公司內有哪些員工可能適合我的職缺？", mF1: "查看主動公開轉職意願的員工，以及其技能符合程度與職位準備度。",
+    mP2: "我應該考慮內部人才，還是對外招募？", mF2: "查看內部轉調、進一步評估或外部招募的建議，最終決定仍由人來判斷。",
     hP1: "現有培訓能補足未來的技能缺口嗎？", hF1: "找出現有課程無法培養至職位要求等級的技能。",
     hP2: "如果公司未來需要增加某些職位的人數，會產生什麼影響？", hF2: "調整未來各職位的人力編制目標，查看人力缺口如何變化。",
-    recWhat: "這個原型將重複性的招募工作自動化，同時輔助人為的錄用決定。招募人員設定篩選條件，AI 解讀履歷，並由規則式評分協助找出值得審查的候選人。自動化的面試預約與招募儀表板，進一步減少行政工作。",
+    recWhat: "這個原型將重複性的招募工作自動化，同時協助招募人員做出錄用決策。招募人員設定篩選條件，AI 解讀履歷，並由規則式評分協助找出值得審查的候選人。自動化的面試預約與招募儀表板，進一步減少行政工作。",
     cW1: "招募人員", cW2: "用人主管", cW3: "應徵者", cW4: "招募人員",
     cP1: "逐份閱讀和評分履歷很花時間，標準也可能不一致。", cF1: "招募人員設定篩選規則，AI 判斷適用項目；實際加減分由程式從 70 分起算。",
-    cP2: "一個自動分數可能忽略候選人的其他背景。", cF2: "主管查看評分理由，並可在婉拒信寄出前重新審查候選人。",
+    cP2: "單一的自動評分，可能忽略候選人的其他背景。", cF2: "主管查看評分理由，並可在婉拒信寄出前重新審查候選人。",
     cP3: "候選人和面試官要來回確認時間，耗費不少溝通。", cF3: "候選人選擇可預約時段；系統再次確認行事曆後才完成預約。",
     cP4: "招募團隊需要知道候選人在哪些階段流失。", cF4: "儀表板顯示各階段人數；AI 僅解釋彙總資訊，不接觸候選人個資。",
-    tocHead: "這個網頁有什麼",
+    tocHead: "本頁內容",
     toc1tag: "個人專案 · 2026", toc1t: "WorkforceIQ", toc1b: "串連員工技能、公司內部職缺與培訓課程的原型。從員工、用人主管與 HR 三種角度看同一套資訊。",
-    toc2tag: "4 人團隊（組長）· 2026", toc2t: "AI 招募自動化系統", toc2b: "自動化重複性的招募工作（包括初步履歷篩選與面試排程），同時追蹤招募進度，並讓招聘決策保留在人的手中。",
+    toc2tag: "4 人團隊（組長）· 2026", toc2t: "AI 招募自動化系統", toc2b: "自動化重複性的招募工作（包括初步履歷篩選與面試排程），同時追蹤招募進度，錄用與否仍由人來判斷。",
     toc3tag: "2024–2026", toc3t: "研究與其他專案", toc3b: "AI 履歷改寫的研究提案、外送平台資料庫，以及會員消費分析。",
-    tocMore: "專案之後是我的經歷、各項目之間的關聯，以及我接下來想前往的方向。",
-    whyH: "我為什麼做它", whatH: "它是什麼",
+    tocMore: "專案之後，還有我的經歷、各項目之間的關聯，以及接下來的方向。",
+    whyH: "開發動機", whatH: "專案內容",
     wiqWhy: "在台達電子擔任人資實習生期間，我開始關注企業如何將員工培訓與內部職涯發展機會連結起來。員工即使培養了新技能，也可能不清楚自己可以朝哪些職位發展；而當公司出現職缺時，主管也可能忽略具有潛力的內部人才。因此，我開發 WorkforceIQ，探索如何透過科技更有效地串聯這些原本分散的決策。",
-    wiqWhat: "WorkforceIQ 是一套人力規劃與企業內部人才流動的原型系統，旨在讓員工職涯發展與企業人才配置更加便利。員工可以探索公司內部的職位機會、比較自身已記錄的技能與職位要求，並找到相關培訓課程；用人主管可以尋找有內部轉職意願的員工，而人資部門則能辨識未來的人力需求與技能培訓缺口。WorkforceIQ 使用模擬資料開發，目的是輔助人員做出決策，而不是由系統自動決定人才配置。",
+    wiqWhat: "WorkforceIQ 是一套人力規劃與企業內部人才流動的原型系統，旨在讓員工職涯發展與企業人才配置更加便利。員工可以探索公司內部的職位機會、比較自身已記錄的技能與職位要求，並找到相關培訓課程；用人主管可以尋找有內部轉職意願的員工，而HR 則能辨識未來的人力需求與技能培訓缺口。WorkforceIQ 使用模擬資料開發，目的是輔助人做決策，而不是由系統自動決定人才配置。",
     rEmpT: "員工", rEmpS: "探索公司內部的職涯機會與所需準備。", rEmp1: "比對自己的已記錄技能與其他職務的技能要求。", rEmp2: "分清楚真正的技能落差與尚無紀錄的部分，並查看適用課程。", rEmp3: "針對每個收藏的職務，決定是否公開意向。",
     rMgrT: "用人主管", rMgrS: "評估對內部職缺有興趣的員工。", rMgr1: "只看到分配給自己的職缺。", rMgr2: "不只看分數，也看技能配對、準備度標籤與依據。", rMgr3: "實際錄用或調動仍由主管決定，原型不自動選人。",
     rHrT: "人資部門", rHrS: "連結未來人力需求與企業內部培訓。", rHr1: "比較每個職位的現有與規劃人數。", rHr2: "找出現有課程無法培養至職務需求等級的技能。", rHr3: "可以調整規劃人數，測試不同情境。",
@@ -974,7 +974,7 @@ const I18N = {
     h1: "嗨，我是陳德淇（Harper）。",
     sub: "我結合組織知識與程式、資料技能，打造實用的軟體。我關心的不只是系統如何運作，也包括它們的設計如何影響使用者。",
     hint: "點選圓點探索相關經歷與專案，也可以拖曳圓點。",
-    ctaDemo: "看看這裡有什麼", ctaContact: "聯絡我", moreHead: "研究與其他專案", connectHead: "它們如何連在一起",
+    ctaDemo: "看作品", ctaContact: "聯絡我", moreHead: "研究與其他專案", connectHead: "經歷與專案的關聯",
     wiqC1: "員工、主管、HR 三種視角", wiqC2: "規則在頁面上說明", wiqC3: "員工自己決定誰能看到職涯意向",
     recC1: "4 人團隊（組長）", recC2: "從履歷到面試的完整流程", recC3: "2 個線上 Demo",
     lgWork: "專案", lgExp: "經歷", lgTheme: "主題", lgSkill: "技能",
@@ -982,7 +982,7 @@ const I18N = {
     screensSub: "透過原型的截圖，了解 AI 招募自動化系統如何支援招募人員、用人主管與應徵者。（所有資料皆為虛構）", tryHr: "自己試試看：HR 指揮中心", tryBook: "自己試試看：應徵者預約",
     toc3a: "研究提案：AI 輔助履歷改寫中的性別偏誤", toc3b2: "課堂專案：外送平台關聯式資料庫", toc3c: "政大商業分析社：會員分群與留存分析",
     edu1: "國立臺灣大學",
-    edu2: "組織行為與決策分析跨領域學士",
+    edu2: "校學士學位學程（組織行為與決策分析）",
     edu3: "GPA 3.91 / 4.30",
     eduNote: "自行設計的跨領域學位，結合組織行為、資訊系統與量化分析。",
     issmAward: "黃紀獎學金 · 優秀期末發表",
@@ -1018,12 +1018,12 @@ const I18N = {
     issmName: "AI 協助履歷改寫中的性別偏誤",
     issmWhen: "中央研究院社會科學計量方法研習營（ISSM）",
     issmBody: "帶有性別訊號的姓名，是否會影響 ChatGPT 改寫履歷的方式，以及招募人員對改寫結果的評價？在中央研究院 2026 年 ISSM，我提出了一個三階段的研究提案來探討這個問題。",
-    fl1: "姓名的性別訊號", fl2: "ChatGPT 改寫的差異", fl3: "招聘評價的差異", issmMore: "研究設計與現況",
+    fl1: "姓名的性別訊號", fl2: "ChatGPT 改寫的差異", fl3: "招募評價的差異", issmMore: "研究設計與現況",
     pp1h: "研究一：挑選帶有性別訊號的姓名", pp1a: "從 60 個台灣常見姓名出發，以人類與 GPT 的評分評估其被感知的性別。", pp1b: "預期成果：選出 26 個姓名，在被感知性別上保持平衡，同時盡量縮小被感知年齡與社經背景的差異。",
     pp2h: "研究二：分析 AI 生成的改寫", pp2a: "將 21 份基礎履歷與 26 個姓名配對，每種組合生成兩份改寫。", pp2b: "預期成果：分析 1,092 份改寫在用字上的差異，包括能動性（agency）與共同體性（communion）。",
-    pp3h: "研究三：評估招聘判斷", pp3a: "邀請約 40 位 HR 專業人員比較匿名的改寫履歷配對。", pp3b: "預期成果：檢視 AI 生成用字上的差異，是否會影響面試推薦。",
+    pp3h: "研究三：評估招募判斷", pp3a: "邀請約 40 位 HR 專業人員比較匿名的改寫履歷配對。", pp3b: "預期成果：檢視 AI 生成用字上的差異，是否會影響面試推薦。",
     ppH: "假說一：姓名的性別訊號會改變 ChatGPT 改寫履歷的方式。假說二：這些改寫會改變人資對履歷的評價。",
-    is1: "規劃的分析方式：以負二項混合效應模型分析改寫的用字模式，並以次序或 Logistic 混合效應模型分析招聘評價。",
+    is1: "規劃的分析方式：以負二項混合效應模型分析改寫的用字模式，並以次序或 Logistic 混合效應模型分析招募評價。",
     is2: "這個專案是已完成的研究提案，並非實證研究。尚未進行資料蒐集與假說檢定。規劃中的限制包括僅使用單一 AI 模型、經挑選的性別訊號姓名，以及合成履歷。",
     is3: "第三階段（規劃）：預計約 40 位 HR 專業人員閱讀匿名履歷配對，評估面試推薦；規劃使用累積連結與 Logistic 混合效應模型。",
     is4: "目前狀態：研究提案與分析計畫已完成，尚未正式蒐集資料或進行假說檢定。規劃限制包括單一 AI 模型、刻意挑選性別印象鮮明的姓名，以及合成履歷。",
@@ -1031,44 +1031,44 @@ const I18N = {
     clBody: "我們的五人團隊分析了一間室內運動娛樂場館連鎖企業於 2015 至 2023 年間的約 200 萬筆交易，涵蓋逾 12 萬名會員。透過 RFM 與消費行為分析，我們辨識不同會員客群，並提出針對性的留存策略。",
     dbName: "外送關聯式資料庫", dbWhen: "五人課程專案",
     dbBody: "我們的團隊為一個虛構的外送服務設計了 13 張表的 MySQL 資料庫，為餐廳、訂單與相關紀錄建立模型，同時盡量減少資料重複與不一致。資料庫正規化至第三正規化（3NF），以實體關係圖（ER diagram）記錄結構，並用產生的資料與九個 SQL 查詢進行測試。",
-    deltaWhen: "人才招募實習生\n2025 年 7–12 月",
+    deltaName: "台達電子", deltaWhen: "人才招募實習生\n2025 年 7–12 月",
     deltaBody: "使用公司內部 HR 資訊系統，每週支援超過 40 位候選人的招募流程，包括候選人追蹤與面試協調。協助規劃 2026 校園招募活動。這段經歷也讓我對自動化重複性的招募工作，以及連結員工發展與人力規劃產生興趣。",
     rfWhen: "IT 招募實習生\n2024 年 6 月–2025 年 1 月",
     rfBody: "為半導體與科技職缺尋找人才，並將技術性的職缺要求轉化為實用的搜尋與篩選標準。單季創造逾新台幣 10 萬元的營收，並在台北辦公室的季度頒獎中獲得表揚。",
     clubName: "政大商業分析社", clubWhen: "副社長 · 2024–2025\n人資長 · 2023–2024",
     clubBody: "負責社員招募、人資營運與對外關係。籌辦兩場職涯交流活動，合計邀請超過 16 位講者、吸引超過 70 位參與者。",
     whereName: "WorkforceIQ 的起點",
-    whereBody: "在大型電子公司實習時，我注意到一個落差：員工即使透過課程學到新技能，這些成長也未必轉化成看得見的內部職涯機會。WorkforceIQ 因此嘗試串連技能紀錄、內部職缺與培訓課程，同時讓員工自行決定是否公開職涯意向。",
+    whereBody: "在台達電子實習時，我注意到一個落差：員工即使透過課程學到新技能，這些成長也未必轉化成看得見的內部職涯機會。WorkforceIQ 因此嘗試串連技能紀錄、內部職缺與培訓課程，同時讓員工自行決定是否公開職涯意向。",
     eduName: "學歷", eduWhen: "2021 年 9 月–2026 年 6 月",
-    eduBody: "國立臺灣大學，組織行為與決策分析跨領域學士，為自行規劃的學程，結合組織行為、資訊系統與統計。GPA 3.91 / 4.30。",
+    eduBody: "國立臺灣大學校學士學位學程（組織行為與決策分析），為自行規劃的跨領域學位，結合組織行為、資訊系統與統計。GPA 3.91 / 4.30。",
     eduCourses: "相關課程：商業程式設計 · 資料庫管理系統 · 現代資料科學視覺化 · 社會統計",
     contactName: "歡迎聯絡", contactBody: "歡迎交流資訊系統、以人為本的技術、學習，以及組織如何負責任地使用資料。",
     footer: "© 2026 Te-Chi (Harper) Chen",
-    close: "關閉", walkHead: "看它怎麼運作", walkIntro: "展開後往下捲動即可。所有資料皆為虛構。",
+    close: "關閉", walkHead: "實際操作畫面", walkIntro: "展開後往下捲動即可。所有資料皆為虛構。",
     walk: "看操作畫面", aboutCo: "公司介紹", source: "資料來源", stepWord: "步驟", ofWord: "/", fiction: "虛構的 Demo 資料",
     w1t: "River 檢視已記錄的技能", w1b: "River Hsu 是一位業務分析師，有 12 項已記錄的技能。檔案顯示各項技能的等級與最後更新日期，並提供搜尋與篩選。",
     w4t: "River 查看相關培訓", w4b: "學習目錄收錄 67 門內部課程，顯示每門課培養的技能、目標等級、時數與先修條件。",
     w5t: "River 控制誰能看到職涯興趣", w5b: "職涯興趣預設不公開。River 可以決定是否讓某個職位的用人主管看到他的興趣。",
     story: "在台達電子的人資實習期間，我開始思考：員工透過培訓累積的技能，如何在探索公司內部職涯機會時發揮更大的作用？這個問題後來成為 WorkforceIQ 的發想起點之一。",
     probH: "問題", prob: "訓練的成果看不見：員工不知道哪些職務適合自己，主管不知道誰接近能勝任，HR 也不知道訓練哪裡不夠。",
-    supH: "它支援什麼", sup: "員工自己決定誰能看到意向；主管看到附判斷依據的準備度標籤；HR 看到訓練補不上的缺口。所有決定都由人來做。",
+    supH: "支援的決策", sup: "員工自己決定誰能看到意向；主管看到附判斷依據的準備度標籤；HR 看到訓練補不上的缺口。所有決定都由人來做。",
     builtH: "我做了什麼", built: "SQLite 資料模型、Skill Match 規則與三個 Streamlit 工作區。",
     roleEmp: "員工", roleMgr: "用人主管", roleHr: "HR",
-    fa1: "國立臺灣大學\n組織行為與決策分析跨領域學士\nGPA 3.91 / 4.30", fa2: "黃紀獎學金，ISSM 2026", fa3: "RecruitFirst 台北辦公室唯一單季營收超過新台幣 10 萬元的實習生",
+    fa1: "國立臺灣大學\n校學士學位學程（組織行為與決策分析）\nGPA 3.91 / 4.30", fa2: "黃紀獎學金，ISSM 2026", fa3: "RecruitFirst 台北辦公室唯一單季營收超過新台幣 10 萬元的實習生",
     hoodHead: "設計取捨", hoodLead: "WorkforceIQ 為什麼是現在這個樣子。",
     k1: "隱私", k2: "可解釋性", k3: "資料完整性",
     d1t: "員工自行決定誰能查看自己的職涯興趣", d1b: "探索其他職位可能涉及敏感的個人意願，因此職涯興趣預設不公開。員工可以針對不同職位，自行決定是否讓負責該職缺的用人主管查看。",
-    d2t: "看得懂的規則，而不是黑箱", d2b: "技能匹配分數與職位準備度標籤，依據公開可見的技能要求與明確規則產生。員工與用人主管可以理解結果如何計算，而不是只能接受無法解釋的推薦。",
+    d2t: "看得懂的規則，而不是黑箱", d2b: "技能符合度分數與職位準備度標籤，依據公開可見的技能要求與明確規則產生。員工與用人主管可以理解結果如何計算，而不是只能接受無法解釋的推薦。",
     d3t: "不將缺少技能紀錄視為缺乏能力", d3b: "當員工的某項技能沒有能力等級紀錄時，系統會標示為「Not recorded（未記錄）」，也不會把它算成技能落差。不過它在 Skill Match 分數中仍以 0 計算，所以系統會提醒分數可能低估了員工的適配度。",
-    headT: "我想前往的方向", headB: "我希望開發能幫助個人與組織更有效率地工作、做出更好決策的技術。過去的專案讓我了解到，如何將組織中的實際問題轉化為可運作的軟體，也讓我開始思考系統的易用性、可靠性，以及這些系統所支援的決策。\n\n在研究所階段，我希望深化技術能力，並學習如何設計與開發更大規模的系統。長期而言，我希望在軟體開發、資訊系統與以人為本的技術領域交會處發展，打造能解決真實組織需求的工具。",
+    headT: "接下來的方向", headB: "我希望開發能幫助個人與組織更有效率地工作、做出更好決策的技術。過去的專案讓我了解到，如何將組織中的實際問題轉化為可運作的軟體，也讓我開始思考系統的易用性、可靠性，以及這些系統所支援的決策。\n\n在研究所階段，我希望深化技術能力，並學習如何設計與開發更大規模的系統。長期而言，我希望在軟體開發、資訊系統與以人為本的技術領域交會處發展，打造能解決真實組織需求的工具。",
     hoodEr: "ER 圖", hoodTests: "測試", hoodCi: "CI 執行紀錄",
     walkSum: "逐步操作畫面（{n} 步）",
     wiqLead: "用同一個情境，依序從三種角色來看：員工、有職缺的主管，以及 HR。",
     recLead: "一位應徵者從履歷到面試的完整路徑，以及之後 HR 看到什麼。",
     deltaCo: "總部位於台灣的電源管理與散熱解決方案全球領導廠商，全球員工逾 8 萬人。",
-    rfCo: "隸屬 HRnetGroup 的人力仲介公司，業務遍及亞太地區。",
+    rfCo: "隸屬 HRnetGroup 的人才招募顧問公司，業務遍及亞太地區。",
     w2t: "River 探索內部職涯選項", w2b: "職涯探索頁會比對 River 已記錄的技能與職位要求，計算 Skill Match 分數。River 可以探索各職位，並查看分數是如何算出的。",
-    w3t: "區分技能落差與缺少紀錄", w3b: "在 Systems Analyst 職位中，WorkforceIQ 會把已記錄的技能落差與缺少紀錄的情況分開。缺少紀錄可能拉低匹配分數，但不代表缺乏能力。有相關培訓時，系統也會一併建議。",
+    w3t: "區分技能落差與缺少紀錄", w3b: "在 Systems Analyst 職位中，WorkforceIQ 會把已記錄的技能落差與缺少紀錄的情況分開。缺少紀錄可能拉低符合度分數，但不代表缺乏能力。有相關培訓時，系統也會一併建議。",
     w6t: "Riley 檢視分配到的職缺", w6b: "Riley Chang 負責一個 Systems Analyst 職缺。儀表板顯示分配給他的職缺與狀態，人員配置的決定仍由人來做。",
     w7t: "Riley 評估內部人員配置選項", w7b: "River 出現在名單中，是因為他選擇公開對這個職位的興趣。WorkforceIQ 顯示 Skill Match 分數，並建議 Internal Mobility 與 Train First 標籤，決定權仍在 Riley。",
     w8t: "HR 探索未來的人力需求", w8b: "HR 比較現有與規劃的人數以找出人力缺口，並調整目標來探索不同情境。",
@@ -1089,15 +1089,32 @@ const I18N = {
       r_issm: ["ISSM 研究", "在中央研究院 ISSM 提出的三階段研究提案，探討姓名的性別訊號是否影響 ChatGPT 改寫履歷，以及後續招募評價。期末發表獲黃紀獎學金肯定；尚無實證研究結果。"],
       e_delta: ["台達電子", "擔任人才招募實習生，每週協助處理超過 40 位候選人的招募流程，並參與規劃 2026 年校園招募活動。這段經歷啟發我思考招募自動化，以及培訓與內部職涯機會如何連結。"],
       e_rf: ["RecruitFirst", "擔任 IT 招募實習生，為半導體與科技職缺搜尋人才，將技術要求轉化為搜尋及初篩條件，單季創造超過新台幣 10 萬元營收。"],
-      e_club: ["政大商分社", "先後擔任人資長與副社長，負責社員招募並籌辦兩場職涯交流活動，也帶領五人團隊完成會員分群與留存分析專案。"],
+      e_club: ["政大商業分析社", "先後擔任人資長與副社長，負責社員招募並籌辦兩場職涯交流活動，也帶領五人團隊完成會員分群與留存分析專案。"],
     }
   }
 };
 
 /* ---------- state ---------- */
+// English is the default for every visitor. Chinese shows only when the URL has ?lang=zh
+// (e.g. https://harperchen.dev/?lang=zh). The choice is never saved, so a fresh visit is always English.
 let lang = "en";
-// English only for now. To re-enable Chinese: remove the "hidden" attribute and style="display:none" on #langBtn, and restore the localStorage line below.
-// try { const s = localStorage.getItem("hc-lang"); if (s === "zh" || s === "en") lang = s; } catch (e) {}
+try { if (new URLSearchParams(location.search).get("lang") === "zh") lang = "zh"; } catch (e) {}
+// Clear any choice saved by an older version of this page.
+try { localStorage.removeItem("hc-lang"); } catch (e) {}
+const TITLES = { en: "Harper Chen Portfolio", zh: "陳德淇 Harper Chen｜作品集" };
+// Keep ?lang=zh in the address bar in step with the language shown, so a copied link opens in the same language.
+function syncUrl() {
+  try {
+    const u = new URL(location.href);
+    if (lang === "zh") u.searchParams.set("lang", "zh"); else u.searchParams.delete("lang");
+    history.replaceState(null, "", u.pathname + u.search + u.hash);
+  } catch (e) {}
+}
+// Demo links carry ?lang=zh too, so the Streamlit apps can open in Chinese once they support it.
+function demoHref(href) {
+  if (lang !== "zh" || !safe(href) || href.charAt(0) === "#") return href;
+  try { const u = new URL(href); u.searchParams.set("lang", "zh"); return u.toString(); } catch (e) { return href; }
+}
 const T = () => I18N[lang];
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -1458,7 +1475,7 @@ function buildCases() {
     const sum = el("summary");
     c.sumEl = sum;
     const tryp = el("p", { "class": "tryit" });
-    const tryA = el("a", { href: LINKS[c.slot === "rec-cand" ? "recBooking" : c.demo], target: "_blank", rel: "noopener" }); tryA.dataset.k = "tryIt";
+    const tryA = el("a", { href: LINKS[c.slot === "rec-cand" ? "recBooking" : c.demo], target: "_blank", rel: "noopener" }); tryA.dataset.k = "tryIt"; tryA.dataset.demo = c.slot === "rec-cand" ? "recBooking" : c.demo;
     tryp.append(tryA);
     det.append(sum, layout, tryp);
     c.det = det;
@@ -1532,12 +1549,16 @@ function caseText() {
 /* ---------- text, links, theme ---------- */
 function applyText() {
   document.documentElement.lang = lang === "zh" ? "zh-Hant" : "en";
+  document.title = TITLES[lang];
   document.querySelectorAll("[data-k]").forEach(e => {
     const v = T()[e.dataset.k];
     if (v == null) return;
     if (e.hasAttribute("data-html")) e.innerHTML = v; else e.textContent = v;
   });
-  document.getElementById("langBtn").textContent = lang === "zh" ? "English" : "中文";
+  const lb2 = document.getElementById("langBtn");
+  lb2.textContent = lang === "zh" ? "English" : "中文";
+  lb2.setAttribute("lang", lang === "zh" ? "en" : "zh-Hant");
+  lb2.setAttribute("aria-label", lang === "zh" ? "Switch to English" : "切換為繁體中文");
   labels();
   renderPanel();
   renderLinks();
@@ -1551,9 +1572,10 @@ function fill(id, items) {
 }
 function renderLinks() {
   const t = T();
-  [["tryWiq","wiqDemo"],["tryRec1","recDemo"],["tryRec2","recBooking"]].forEach(([i,k]) => { const a = document.getElementById(i); if (a && safe(LINKS[k])) a.href = LINKS[k]; });
-  fill("wiqLinks", [[t.demo, LINKS.wiqDemo], [t.code, LINKS.wiqCode]]);
-  fill("recLinks", [[t.cc, LINKS.recDemo], [t.booking, LINKS.recBooking], [t.code, LINKS.recCode]]);
+  [["tryWiq","wiqDemo"],["tryRec1","recDemo"],["tryRec2","recBooking"]].forEach(([i,k]) => { const a = document.getElementById(i); if (a && safe(LINKS[k])) a.href = demoHref(LINKS[k]); });
+  document.querySelectorAll("a[data-demo]").forEach(a => { const h = LINKS[a.dataset.demo]; if (safe(h)) a.href = demoHref(h); });
+  fill("wiqLinks", [[t.demo, demoHref(LINKS.wiqDemo)], [t.code, LINKS.wiqCode]]);
+  fill("recLinks", [[t.cc, demoHref(LINKS.recDemo)], [t.booking, demoHref(LINKS.recBooking)], [t.code, LINKS.recCode]]);
   fill("hoodLinks", [[t.hoodEr, LINKS.wiqEr]]);
   fill("contactLinks", [["GitHub", LINKS.github], ["LinkedIn", LINKS.linkedin]]);
 }
@@ -1571,7 +1593,7 @@ document.getElementById("copyBtn").addEventListener("click", ev => {
 
 document.getElementById("langBtn").addEventListener("click", () => {
   lang = lang === "en" ? "zh" : "en";
-  try { localStorage.setItem("hc-lang", lang); } catch (e) {}
+  syncUrl();
   applyText();
 });
 document.getElementById("themeBtn").addEventListener("click", () => {
